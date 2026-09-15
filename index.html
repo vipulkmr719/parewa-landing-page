@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Parewa — Proposals that come back with an answer</title>
+<meta name="description" content="Parewa turns a short client brief into a professional, on-brand proposal — written by AI, tracked from the moment your client opens it, and signed online. Built for digital marketing agencies in India.">
+<meta name="theme-color" content="#F7F8F7">
+<link rel="canonical" href="https://parewa.com/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Parewa — Proposals that come back with an answer">
+<meta property="og:description" content="Send the proposal in 15 minutes. Not next Tuesday. AI proposal software for Indian digital agencies.">
+<meta property="og:url" content="https://parewa.com/">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+
+<script>document.documentElement.classList.add('js')</script>
+
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/favicon.svg">
+
+<!-- Fonts are deliberately NOT preloaded. Measured on throttled slow 4G
+     (400 kbps / 400 ms RTT, 4x CPU), preloading them pushed first contentful
+     paint from 1.12s to 1.71s: the font bytes compete with the stylesheet on a
+     narrow pipe, and font-display:swap means text paints without them anyway.
+     The fallback stacks below are metric-matched so the swap costs no shift. -->
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<a class="visually-hidden" href="#main">Skip to content</a>
+
+<!-- ======================================================================
+     Header
+     ====================================================================== -->
+<header class="site-header" id="siteHeader">
+  <div class="wrap site-header__inner">
+    <a class="brand" href="#top">
+      <svg class="brand__mark" viewBox="0 0 48 48" aria-hidden="true">
+        <defs>
+          <linearGradient id="ir-header" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#5B3E8C"/><stop offset="100%" stop-color="#1A6B6E"/>
+          </linearGradient>
+        </defs>
+        <polygon points="26,13 8,2 18,26" fill="#27406B"/>
+        <polygon points="30,18 26,13 18,26 24,33 35,22 39,17" fill="#2F4C7C"/>
+        <polygon points="45,14 38,8 32,12 30,18 39,17" fill="url(#ir-header)"/>
+        <polygon points="18,26 2,35 12,38" fill="#3B5B90"/>
+        <polygon points="18,26 12,38 5,46 24,33" fill="#1E3355"/>
+      </svg>
+      <span class="brand__name">Parewa</span>
+      <span class="brand__tagline">Proposals that come back with an answer.</span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <button class="btn btn--primary" data-open-waitlist>Join the Waitlist</button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<span id="top"></span>
+
+<!-- ======================================================================
+     1. Hero
+     ====================================================================== -->
+<section class="section hero">
+  <div class="wrap">
+    <p class="eyebrow">Now in early access for Indian digital agencies</p>
+
+    <div class="hero__copy">
+      <h1>Send the proposal in 15&nbsp;minutes. Not next Tuesday.</h1>
+    </div>
+
+    <p class="lead">
+      Parewa turns a short client brief into a professional, on-brand proposal — written by
+      AI, designed to your agency&rsquo;s identity, <span class="grain">tracked from the moment your
+      client opens it</span>, and signed online. Built specifically for digital marketing
+      agencies in India.
+    </p>
+
+    <div class="cta-row">
+      <button class="btn btn--primary" data-open-waitlist>Join the Waitlist</button>
+      <a class="btn btn--link" href="#how">See how it works</a>
+    </div>
+
+    <p class="microcopy">
+      Free to join. No card required. Waitlist members get 40% off for their first year.
+    </p>
+
+    <!-- The product doing its one trick: brief in, proposal out, status back. -->
+    <div class="demo" id="demo">
+      <div class="demo__panes">
+
+        <div class="demo__pane demo__pane--brief">
+          <p class="demo__label">Client brief</p>
+          <p class="brief__body" id="briefText">Meraki Interiors, Pune. Wants to rank for &ldquo;interior designers in Pune&rdquo; and cut down on paid leads. Six-month SEO retainer, technical fixes plus content. They mentioned ₹1.5–2L a month.<span class="brief__caret" aria-hidden="true"></span></p>
+          <div class="brief__meta">
+            <span class="chip">Service: SEO</span>
+            <span class="chip">₹1.5–2L / month</span>
+            <span class="chip">6 months</span>
+          </div>
+          <p class="brief__action" aria-hidden="true">
+            <span class="brief__btn">Draft proposal</span>
+            <span class="brief__done">Drafted in 12s</span>
+          </p>
+        </div>
+
+        <div class="demo__pane">
+          <p class="demo__label">Proposal</p>
+          <div class="doc assemble">
+            <div class="doc__brandbar">
+              <span class="doc__logo" aria-hidden="true">K</span>
+              <span class="doc__agency">Kanvas Digital</span>
+              <span class="doc__date">15 Sep 2026</span>
+            </div>
+            <div>
+              <p class="doc__title">SEO Retainer — Meraki Interiors</p>
+              <p class="doc__sub">Prepared for Aditi Kulkarni, Founder</p>
+            </div>
+            <div class="doc__section">
+              <p class="doc__h">Objectives</p>
+              <div class="doc__line doc__line--mid"></div>
+              <div class="doc__line doc__line--short"></div>
+            </div>
+            <div class="doc__section">
+              <p class="doc__h">Scope of work</p>
+              <ul class="doc__bullets">
+                <li>Technical audit &amp; Core Web Vitals fixes</li>
+                <li>Local SEO for Pune &amp; PCMC clusters</li>
+                <li>8 content pieces / month</li>
+              </ul>
+            </div>
+            <div class="doc__section">
+              <p class="doc__h">Investment</p>
+              <table class="doc__table">
+                <thead><tr><th scope="col">Line item</th><th scope="col">Monthly</th></tr></thead>
+                <tbody>
+                  <tr><td>SEO retainer</td><td>₹1,65,000</td></tr>
+                  <tr><td>Content production</td><td>₹35,000</td></tr>
+                  <tr><td class="doc__gst">GST @ 18%</td><td class="doc__gst">₹36,000</td></tr>
+                  <tr><td>Total</td><td>₹2,36,000</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="doc__sign">
+              <span>Signature</span><span class="doc__signline"></span><span>Date</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="rail" id="rail" aria-live="polite">
+        <span class="rail__step" data-live="true"><span class="rail__dot"></span>Sent</span>
+        <span class="rail__arrow" aria-hidden="true">&rarr;</span>
+        <span class="rail__step" data-live="true"><span class="rail__dot"></span>Opened 3&times;</span>
+        <span class="rail__arrow" aria-hidden="true">&rarr;</span>
+        <span class="rail__step" data-live="true"><span class="rail__dot"></span>Signed</span>
+        <span class="rail__note">Delivered Thursday 4:12&nbsp;pm · signed Friday 10:48&nbsp;am</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Trust strip.
+       TODO before launch: set data-count to the real waitlist number, and list
+       only design partners who have agreed in writing to be named here. -->
+  <div class="trust">
+    <div class="wrap trust__inner">
+      <span class="trust__count">
+        <span class="rail__dot" aria-hidden="true"></span>
+        <b id="waitlistCount" data-count="142">142</b> agencies on the waitlist
+      </span>
+      <span>Design partners shaping the first release</span>
+      <span class="trust__partners">
+        <span class="partner">Kanvas Digital</span>
+        <span class="partner">Thirdeye Media</span>
+        <span class="partner">Studio Nemara</span>
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     2. Problem
+     ====================================================================== -->
+<section class="section section--sunk">
+  <div class="wrap">
+    <h2 class="section__head">You&rsquo;re not losing deals on price. You&rsquo;re losing them on turnaround.</h2>
+
+    <div class="problem__story">
+      <p>A client calls on Thursday. They want a scope and a number. So the same thing happens
+      that always happens.</p>
+      <p>Someone opens the last proposal you sent — the one for a different client, in a
+      different industry — and starts deleting. The formatting breaks halfway down. The
+      pricing table from the old retainer is still in there. Three hours later it&rsquo;s a PDF,
+      and it goes out on WhatsApp on Friday evening.</p>
+      <p>Then nothing. You don&rsquo;t know if they opened it. You don&rsquo;t know if they read past page
+      two. You don&rsquo;t know if they forwarded it to their founder or let it sit. So on Monday
+      you send &ldquo;Just following up 😊&rdquo; and wait some more.</p>
+    </div>
+
+    <ul class="rule-list">
+      <li>
+        <strong>Two to four hours per proposal.</strong>
+        <span>Usually yours, usually after 9pm, because nobody else on the team can write scope the way you do.</span>
+      </li>
+      <li>
+        <strong>Every proposal looks like a different agency made it.</strong>
+        <span>Different fonts, different structure, the old logo on page one. Not the impression you want to make at a ₹2 lakh/month pitch.</span>
+      </li>
+      <li>
+        <strong>Zero visibility after you hit send.</strong>
+        <span>No idea if it was opened, skimmed, or ignored. Your follow-up is pure guesswork.</span>
+      </li>
+      <li>
+        <strong>Signatures take a week.</strong>
+        <span>Print, sign, scan, email. Or worse, &ldquo;we&rsquo;ll do it when I&rsquo;m back in office.&rdquo;</span>
+      </li>
+      <li>
+        <strong>Your senior team is stuck doing document work.</strong>
+        <span>Account managers who should be on calls are fixing table borders instead.</span>
+      </li>
+    </ul>
+
+    <p class="problem__close">
+      Meanwhile the agency that replied in two hours with something sharp has already booked
+      the follow-up call.
+    </p>
+  </div>
+</section>
+
+<!-- ======================================================================
+     3. Solution / Benefits
+     ====================================================================== -->
+<section class="section">
+  <div class="wrap">
+    <h2 class="section__head">One brief in. A ready-to-send proposal out.</h2>
+    <p class="lead">
+      Tell Parewa what the client needs in a few lines. It writes the scope, deliverables,
+      timeline and pricing in your agency&rsquo;s voice, on your agency&rsquo;s template. You review,
+      adjust, and send — usually in under 15 minutes.
+    </p>
+
+    <div class="benefits">
+      <div class="benefit">
+        <h3>Get your evenings back</h3>
+        <p>What took three hours takes fifteen minutes. An agency sending eight proposals a
+        month gets roughly 25 hours back — that&rsquo;s a full account manager week, every month,
+        spent on clients instead of formatting.</p>
+      </div>
+      <div class="benefit">
+        <h3>Walk in looking like the biggest agency in the room</h3>
+        <p>Every proposal carries your logo, your colours, your structure. Consistent from the
+        first line to the signature block, whether you wrote it or your newest AM did.</p>
+      </div>
+      <div class="benefit">
+        <h3>Know exactly what&rsquo;s happening after you send</h3>
+        <p>See when it was opened, how many times, and which sections held their attention.
+        Follow up because you know they&rsquo;re reading — not because it&rsquo;s been four days.</p>
+      </div>
+      <div class="benefit">
+        <h3>Close while the intent is still hot</h3>
+        <p>The client signs in the browser, on their phone, in under a minute. No printing, no
+        scanning, no &ldquo;let me get back to you next week.&rdquo;</p>
+      </div>
+      <div class="benefit">
+        <h3>Let your team send proposals without you</h3>
+        <p>Templates and approved content blocks mean an account manager can put together a
+        proposal you&rsquo;d be happy to put your name on. You just approve it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     4. Features
+     ====================================================================== -->
+<section class="section section--sunk" id="features">
+  <div class="wrap">
+    <h2 class="section__head">Everything you need to go from brief to signed</h2>
+
+    <div style="margin-top:clamp(2rem,1.5rem + 2vw,3rem)">
+
+      <!-- 4.1 -->
+      <div class="feature">
+        <div class="feature__copy">
+          <h3>AI that writes from a brief, not from a blank page</h3>
+          <p>Paste your call notes, a client email, or three rough bullet points. Parewa drafts
+          the objectives, scope of work, deliverables, timelines and pricing — structured the
+          way agency proposals are actually structured. You edit, you don&rsquo;t start from zero.</p>
+        </div>
+        <div class="shot">
+          <div class="shot__bar">Draft from brief <span>12 sec</span></div>
+          <p class="paste">&ldquo;Call w/ Meraki — 6 mo SEO, technical + content, want local Pune
+          leads, budget around 1.5–2L…&rdquo;</p>
+          <ul>
+            <li class="outline-row"><span class="tick" aria-hidden="true">✓</span><b>Objectives</b><i>Drafted</i></li>
+            <li class="outline-row"><span class="tick" aria-hidden="true">✓</span><b>Scope of work</b><i>Drafted</i></li>
+            <li class="outline-row"><span class="tick" aria-hidden="true">✓</span><b>Deliverables &amp; timeline</b><i>Drafted</i></li>
+            <li class="outline-row"><span class="tick" aria-hidden="true">✓</span><b>Investment &amp; GST</b><i>Drafted</i></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 4.2 -->
+      <div class="feature feature--flip">
+        <div class="feature__copy">
+          <h3>Templates built for the work Indian agencies actually sell</h3>
+          <p>Ready-made, editable templates for SEO, Social Media Management, Performance
+          Marketing, Branding &amp; Identity, Website Design &amp; Development, and Content
+          Marketing. Built around monthly retainers, INR pricing tables and GST line items —
+          not adapted from a US template that assumes hourly billing in dollars.</p>
+        </div>
+        <div class="shot">
+          <div class="shot__bar">Templates <span>6 services</span></div>
+          <div class="tpl-grid">
+            <div class="tpl tpl--active">SEO</div>
+            <div class="tpl">Social Media</div>
+            <div class="tpl">Performance</div>
+            <div class="tpl">Branding</div>
+            <div class="tpl">Web Design</div>
+            <div class="tpl">Content</div>
+          </div>
+          <div class="brief__meta">
+            <span class="chip">Monthly retainer</span>
+            <span class="chip">INR pricing</span>
+            <span class="chip">GST @ 18%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4.3 -->
+      <div class="feature">
+        <div class="feature__copy">
+          <h3>An editor that respects your brand</h3>
+          <p>Drop in your logo, set your brand colours and fonts once. Every proposal after
+          that comes out on-brand automatically. Drag sections around, swap in case studies,
+          adjust pricing. It works like a document, not like software you need training for.</p>
+        </div>
+        <div class="shot">
+          <div class="shot__bar">Brand kit <span>Applied to 34 proposals</span></div>
+          <ul>
+            <li class="kit-row"><span>Logo</span><span class="logo-slot">KD</span></li>
+            <li class="kit-row"><span>Colours</span>
+              <span class="swatches">
+                <span class="sw" style="background:#1B3A2F"></span>
+                <span class="sw" style="background:#D9744A"></span>
+                <span class="sw" style="background:#E9E4D8"></span>
+                <span class="sw" style="background:#2B2B2B"></span>
+              </span>
+            </li>
+            <li class="kit-row"><span>Headings</span><span style="font-weight:600">Söhne Dreiviertel</span></li>
+            <li class="kit-row"><span>Body</span><span>Söhne Buch</span></li>
+            <li class="kit-row"><span>Cover</span><span>Full-bleed, logo top-left</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 4.4 -->
+      <div class="feature feature--flip">
+        <div class="feature__copy">
+          <h3>Open and view tracking</h3>
+          <p>A notification the moment your client opens the proposal. Then the detail: how
+          many times they came back, how long they spent on the pricing page, whether they
+          forwarded it to someone else. Your follow-up finally has timing behind it.</p>
+        </div>
+        <div class="shot">
+          <div class="shot__bar">Meraki Interiors <span>Opened 3&times;</span></div>
+          <ul class="activity">
+            <li><span class="state state--on"><span class="rail__dot"></span>Signed</span><time>Fri 10:48 am</time></li>
+            <li><span class="state state--on"><span class="rail__dot"></span>Forwarded to 1 person</span><time>Thu 7:02 pm</time></li>
+            <li><span class="state state--on"><span class="rail__dot"></span>Opened · 4 min 12 s</span><time>Thu 5:19 pm</time></li>
+            <li><span class="state state--on"><span class="rail__dot"></span>Opened · 1 min 40 s</span><time>Thu 4:14 pm</time></li>
+          </ul>
+          <div class="heat">
+            <div class="heat__row"><span>Investment</span><span class="heat__track"><span class="heat__fill" style="width:88%"></span></span><span>2m 41s</span></div>
+            <div class="heat__row"><span>Scope of work</span><span class="heat__track"><span class="heat__fill" style="width:54%"></span></span><span>1m 36s</span></div>
+            <div class="heat__row"><span>Case studies</span><span class="heat__track"><span class="heat__fill" style="width:22%"></span></span><span>0m 38s</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4.5 -->
+      <div class="feature">
+        <div class="feature__copy">
+          <h3>Built-in e-signature</h3>
+          <p>The client accepts and signs inside the proposal itself, on desktop or mobile.
+          Both sides get a stamped PDF copy. No third-party signing tool, no extra
+          subscription.</p>
+        </div>
+        <div class="shot">
+          <div class="shot__bar">Accept &amp; sign <span>iPhone · Safari</span></div>
+          <div class="sign-card">
+            <p class="sign-name">Aditi Kulkarni</p>
+            <p class="sign-meta">Founder, Meraki Interiors · 19 Sep 2026, 10:48 am IST</p>
+          </div>
+          <span class="stamp"><span class="rail__dot" aria-hidden="true"></span>Stamped PDF sent to both parties</span>
+        </div>
+      </div>
+
+      <!-- 4.6 -->
+      <div class="feature feature--flip">
+        <div class="feature__copy">
+          <h3>A workflow that stays out of the way</h3>
+          <p>Duplicate a past proposal in one click. Save your best-performing scope sections
+          as reusable blocks. Share a link instead of a 14MB attachment. Everything your team
+          has sent, in one place, searchable.</p>
+        </div>
+        <div class="shot">
+          <div class="shot__bar">All proposals <span>34 sent</span></div>
+          <p class="search">🔍 &ldquo;performance marketing&rdquo;</p>
+          <ul class="rows">
+            <li><b>Meraki Interiors — SEO</b><span class="pill pill--on">Signed</span></li>
+            <li><b>Hariyali Foods — Performance</b><span class="pill pill--on">Opened 3&times;</span></li>
+            <li><b>Bluecrest Realty — Branding</b><span class="pill">Sent</span></li>
+            <li><b>Anantam Resorts — Social</b><span class="pill">Draft</span></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     5. How it works — the only numbers on the page
+     ====================================================================== -->
+<section class="section" id="how">
+  <div class="wrap">
+    <h2 class="section__head">Three steps. About fifteen minutes.</h2>
+
+    <ol class="steps">
+      <li class="step">
+        <h3>Drop in the brief</h3>
+        <p>Type a few lines about the client, or paste your call notes. Pick the service: SEO,
+        paid media, branding, whatever the deal is. Set your budget range.</p>
+      </li>
+      <li class="step">
+        <h3>Review and brand it</h3>
+        <p>Parewa drafts the full proposal on your template. Read it, tighten the parts only
+        you&rsquo;d know, adjust the pricing. This is where most of your fifteen minutes goes — and
+        it&rsquo;s the only part that genuinely needs you.</p>
+      </li>
+      <li class="step">
+        <h3>Send, track, close</h3>
+        <p>Share a link. Get notified when it&rsquo;s opened. See what they read. Follow up at the
+        right moment, and let them sign in the browser when they&rsquo;re ready.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ======================================================================
+     6. Pricing
+     ====================================================================== -->
+<section class="section section--sunk" id="pricing">
+  <div class="wrap">
+    <h2 class="section__head">Pricing built for Indian agencies</h2>
+    <p class="lead">
+      Less than what one round of proposal formatting costs you in team hours. Both plans
+      include everything you need to send, track and sign.
+    </p>
+
+    <div class="toggle" role="group" aria-label="Billing period">
+      <button type="button" data-billing="monthly" aria-pressed="false">Monthly</button>
+      <button type="button" data-billing="annual"  aria-pressed="true">Annual <span class="save">· 2 months free</span></button>
+    </div>
+
+    <div class="plans">
+
+      <div class="plan">
+        <p class="plan__name">Starter</p>
+        <p class="plan__price"><span data-price-monthly="₹999" data-price-annual="₹9,999">₹9,999</span><span class="per" data-per-monthly="/month" data-per-annual="/year">/year</span></p>
+        <p class="plan__alt" data-alt-monthly="or ₹9,999/year (two months free)" data-alt-annual="₹833/month, billed annually">₹833/month, billed annually</p>
+        <p class="plan__who">For small teams sending a handful of proposals a month.</p>
+        <ul class="plan__features">
+          <li><span class="tick" aria-hidden="true">✓</span>3 user seats</li>
+          <li><span class="tick" aria-hidden="true">✓</span>15 proposals per month</li>
+          <li><span class="tick" aria-hidden="true">✓</span>All service templates</li>
+          <li><span class="tick" aria-hidden="true">✓</span>AI brief-to-proposal writing</li>
+          <li><span class="tick" aria-hidden="true">✓</span>Brand kit: logo, colours, fonts</li>
+          <li><span class="tick" aria-hidden="true">✓</span>Open and view tracking</li>
+          <li><span class="tick" aria-hidden="true">✓</span>Unlimited e-signatures</li>
+          <li><span class="tick" aria-hidden="true">✓</span>Email support</li>
+        </ul>
+        <button class="btn btn--ghost btn--full" data-open-waitlist>Join the Waitlist</button>
+      </div>
+
+      <div class="plan plan--pro">
+        <span class="plan__marker">Most agencies pick this one</span>
+        <p class="plan__name">Pro</p>
+        <p class="plan__price"><span data-price-monthly="₹2,499" data-price-annual="₹24,999">₹24,999</span><span class="per" data-per-monthly="/month" data-per-annual="/year">/year</span></p>
+        <p class="plan__alt" data-alt-monthly="or ₹24,999/year (two months free)" data-alt-annual="₹2,083/month, billed annually">₹2,083/month, billed annually</p>
+        <p class="plan__who">For agencies with a full sales motion and multiple account managers.</p>
+        <p class="plan__intro">Everything in Starter, plus:</p>
+        <ul class="plan__features">
+          <li><span class="tick" aria-hidden="true">✓</span>10 user seats</li>
+          <li><span class="tick" aria-hidden="true">✓</span>Unlimited proposals</li>
+          <li><span class="tick" aria-hidden="true">✓</span>Custom templates and reusable content blocks</li>
+          <li><span class="tick" aria-hidden="true">✓</span>Section-level analytics — see exactly what they read</li>
+          <li><span class="tick" aria-hidden="true">✓</span>Your own domain on proposal links, Parewa branding removed</li>
+          <li><span class="tick" aria-hidden="true">✓</span>Approval workflow before an AM can send</li>
+          <li><span class="tick" aria-hidden="true">✓</span>Collect the advance on acceptance via Razorpay</li>
+          <li><span class="tick" aria-hidden="true">✓</span>CRM and Zapier integrations</li>
+          <li><span class="tick" aria-hidden="true">✓</span>Priority support on WhatsApp</li>
+        </ul>
+        <button class="btn btn--primary btn--full" data-open-waitlist>Get Early Access</button>
+      </div>
+
+    </div>
+
+    <p class="pricing__foot">
+      Extra seats at ₹249/user/month on either plan. All prices exclusive of GST. Annual plans
+      can be paid by UPI, card or NEFT.
+    </p>
+
+    <div class="offer">
+      <div>
+        <h3>Waitlist members get 40% off the first year</h3>
+        <p>Join before launch and your discount locks in at signup — plus free onboarding, and
+        we&rsquo;ll rebuild your three best-performing proposals as Parewa templates at no cost.
+        Limited to the first 500 agencies.</p>
+      </div>
+      <button class="btn btn--primary" data-open-waitlist>Secure Your Spot</button>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     7. FAQ
+     ====================================================================== -->
+<section class="section" id="faq">
+  <div class="wrap">
+    <h2 class="section__head">Questions agency owners ask us</h2>
+
+    <div class="faq">
+      <details>
+        <summary>Will the AI sound generic?</summary>
+        <p>No — it writes on your templates, in your voice, and you edit before sending. Parewa
+        drafts from your brief against the structure and language you&rsquo;ve already approved,
+        then hands it to you. Nothing goes to a client that you haven&rsquo;t read.</p>
+      </details>
+      <details>
+        <summary>Can I import my existing proposals?</summary>
+        <p>Yes. Send us the three proposals you send most often and we&rsquo;ll rebuild them as
+        Parewa templates — free for waitlist members. After that you can turn any proposal you
+        write into a reusable template in one click.</p>
+      </details>
+      <details>
+        <summary>Does it handle GST and INR pricing?</summary>
+        <p>It&rsquo;s built around them. Pricing tables are INR-first with tabular figures, GST is a
+        line item rather than an afterthought, and the templates assume monthly retainers
+        instead of hourly billing in dollars.</p>
+      </details>
+      <details>
+        <summary>What happens to my data?</summary>
+        <p>Your proposals and client data stay yours. We don&rsquo;t train models on them, we don&rsquo;t
+        share them, and you can export everything you&rsquo;ve written and delete your account at
+        any time.</p>
+      </details>
+      <details>
+        <summary>What does Parewa mean?</summary>
+        <p>Parewa (परेवा) means pigeon. The carrier pigeon is the oldest messaging technology
+        there is: you send it out, and it comes back with an answer — which is exactly what a
+        proposal should do.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     8. Final CTA
+     ====================================================================== -->
+<section class="section final">
+  <div class="wrap final__grid">
+    <div>
+      <h2>The next brief is coming this week. Be ready for it.</h2>
+      <p class="lead">
+        Parewa is opening to a limited set of Indian agencies before public launch. Join the
+        waitlist and you&rsquo;ll get early access, 40% off your first year, and a say in what we
+        build next.
+      </p>
+      <p class="trustline">
+        Built in India, for Indian agencies. Your proposals and client data stay yours — we
+        don&rsquo;t train models on them.
+      </p>
+    </div>
+
+    <form class="form" data-waitlist-form novalidate>
+      <div class="field">
+        <label for="f-email">Work email</label>
+        <input id="f-email" name="email" type="email" autocomplete="email" required placeholder="you@youragency.com">
+      </div>
+      <div class="field">
+        <label for="f-agency">Agency name</label>
+        <input id="f-agency" name="agency" type="text" autocomplete="organization" required placeholder="Kanvas Digital">
+      </div>
+      <div class="field">
+        <label for="f-volume">Proposals sent per month</label>
+        <select id="f-volume" name="volume">
+          <option>1–5</option>
+          <option selected>6–15</option>
+          <option>16–30</option>
+          <option>30+</option>
+        </select>
+      </div>
+      <button class="btn btn--primary btn--full" type="submit">Join the Waitlist</button>
+      <p class="form__status" role="status" data-form-status></p>
+      <p class="microcopy">
+        Takes 20 seconds. No card, no commitment. We&rsquo;ll email you the moment your access opens.
+      </p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- ======================================================================
+     9. Footer
+     ====================================================================== -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a class="brand" href="#top">
+          <svg class="brand__mark" viewBox="0 0 48 48" aria-hidden="true">
+            <defs>
+              <linearGradient id="ir-footer" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#5B3E8C"/><stop offset="100%" stop-color="#1A6B6E"/>
+              </linearGradient>
+            </defs>
+            <polygon points="26,13 8,2 18,26" fill="#27406B"/>
+            <polygon points="30,18 26,13 18,26 24,33 35,22 39,17" fill="#2F4C7C"/>
+            <polygon points="45,14 38,8 32,12 30,18 39,17" fill="url(#ir-footer)"/>
+            <polygon points="18,26 2,35 12,38" fill="#3B5B90"/>
+            <polygon points="18,26 12,38 5,46 24,33" fill="#1E3355"/>
+          </svg>
+          <span class="brand__name">Parewa</span>
+        </a>
+        <p class="tagline">Proposals that come back with an answer.</p>
+        <p>AI proposal software for Indian digital agencies.</p>
+      </div>
+
+      <div>
+        <h3>Product</h3>
+        <nav aria-label="Product"><ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#features">Templates</a></li>
+          <li><a href="#" data-open-waitlist>Waitlist</a></li>
+        </ul></nav>
+      </div>
+
+      <div>
+        <h3>Company</h3>
+        <nav aria-label="Company"><ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="mailto:hello@parewa.com">Contact</a></li>
+        </ul></nav>
+      </div>
+
+      <div>
+        <h3>Legal</h3>
+        <nav aria-label="Legal"><ul>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+          <li><a href="/refunds">Refund Policy</a></li>
+        </ul></nav>
+      </div>
+    </div>
+
+    <!-- TODO before launch: replace [City] with the registered office city. -->
+    <div class="footer__base">
+      <span><a href="mailto:hello@parewa.com">hello@parewa.com</a> · [City], India</span>
+      <span>© 2026 Parewa. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Sticky CTA, mobile only -->
+<div class="sticky-cta" id="stickyCta">
+  <button class="btn btn--primary btn--full" data-open-waitlist>Join the Waitlist</button>
+</div>
+
+<!-- Waitlist dialog -->
+<dialog id="waitlistDialog" aria-labelledby="waitlistTitle">
+  <div class="dialog__inner">
+    <button class="dialog__close" type="button" data-close-dialog aria-label="Close">&times;</button>
+    <h2 id="waitlistTitle">Join the waitlist</h2>
+    <p>Early access, 40% off your first year, and a say in what we build next.</p>
+    <form class="form" data-waitlist-form novalidate>
+      <div class="field">
+        <label for="d-email">Work email</label>
+        <input id="d-email" name="email" type="email" autocomplete="email" required placeholder="you@youragency.com">
+      </div>
+      <div class="field">
+        <label for="d-agency">Agency name</label>
+        <input id="d-agency" name="agency" type="text" autocomplete="organization" required placeholder="Kanvas Digital">
+      </div>
+      <div class="field">
+        <label for="d-volume">Proposals sent per month</label>
+        <select id="d-volume" name="volume">
+          <option>1–5</option>
+          <option selected>6–15</option>
+          <option>16–30</option>
+          <option>30+</option>
+        </select>
+      </div>
+      <button class="btn btn--primary btn--full" type="submit">Join the Waitlist</button>
+      <p class="form__status" role="status" data-form-status></p>
+      <p class="form__note">Free to join. No card required.</p>
+    </form>
+  </div>
+</dialog>
+
+<script src="assets/main.js" defer></script>
+</body>
+</html>
