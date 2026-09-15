@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" role="img" aria-label="Parewa">
+  <title>Parewa</title>
+  <defs>
+    <linearGradient id="parewa-iridescence" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#5B3E8C"/>
+      <stop offset="100%" stop-color="#1A6B6E"/>
+    </linearGradient>
+  </defs>
+  <!-- Folded-paper dove. Five straight-edged planes; the iridescence is carried
+       only by the neck plane, where a rock pigeon's iridescence actually sits. -->
+  <polygon points="26,13 8,2 18,26"                 fill="#27406B"/>
+  <polygon points="30,18 26,13 18,26 24,33 35,22 39,17" fill="#2F4C7C"/>
+  <polygon points="45,14 38,8 32,12 30,18 39,17"    fill="url(#parewa-iridescence)"/>
+  <polygon points="18,26 2,35 12,38"                fill="#3B5B90"/>
+  <polygon points="18,26 12,38 5,46 24,33"          fill="#1E3355"/>
+</svg>
