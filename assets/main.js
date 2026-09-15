@@ -131,7 +131,7 @@
   }
 
   /* ==================================================================
-     5. Pricing — monthly / annual, annual first so the saving shows
+     5. Pricing — monthly / annual, monthly first
      ================================================================== */
 
   function wirePricing() {
@@ -148,7 +148,7 @@
     };
 
     buttons.forEach(b => b.addEventListener('click', () => apply(b.getAttribute('data-billing'))));
-    apply('annual');
+    apply('monthly');
   }
 
   /* ==================================================================

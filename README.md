@@ -145,9 +145,11 @@ centred text past two lines slows reading and this page has a lot to say.
   yet", which is the wrong signal pre-launch.
 - **How it works** is the only place on the page that uses numbers, because it
   is the only part that is genuinely a sequence.
-- **Pricing** puts Pro slightly raised, and the monthly/annual toggle defaults
-  to annual so the saving shows first. The ₹ is set at the same weight and size
-  as the number it belongs to.
+- **Pricing** puts Pro slightly raised. The monthly/annual toggle defaults to
+  **monthly**, so the headline number is the ₹999 / ₹2,499 entry price and the
+  annual saving is offered as the upgrade — the sub-line under each price
+  carries it, and the toggle itself is labelled "2 months free". The ₹ is set at
+  the same weight and size as the number it belongs to.
 - **Empty states** (in-app, decided here): the folded-paper mark with *"Nothing
   in flight yet. Start your first proposal."* This is where the bird earns its
   keep — not in the headlines.
