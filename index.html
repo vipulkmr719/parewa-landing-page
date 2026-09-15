@@ -463,14 +463,15 @@
   <div class="wrap">
     <h2 class="section__head">Pricing built for Indian agencies</h2>
     <p class="lead">
-      Less than what one round of proposal formatting costs you in team hours. Both plans
-      include everything you need to send, track and sign.
+      Less than what one round of proposal formatting costs you in team hours. Every plan
+      includes everything you need to send, track and sign.
     </p>
 
-    <div class="toggle" role="group" aria-label="Billing period">
+    <div class="toggle" role="group" aria-label="Billing period" aria-describedby="toggleScope">
       <button type="button" data-billing="monthly" aria-pressed="true">Monthly</button>
       <button type="button" data-billing="annual"  aria-pressed="false">Annual <span class="save">· 2 months free</span></button>
     </div>
+    <p id="toggleScope" class="visually-hidden">Applies to the Starter and Pro plans. Lifetime is a one-time payment.</p>
 
     <div class="plans">
 
@@ -513,11 +514,29 @@
         <button class="btn btn--primary btn--full" data-open-waitlist>Get Early Access</button>
       </div>
 
+      <!-- TODO before launch: the price is on request by design, but the
+           inclusions below are a placeholder — confirm what Lifetime actually
+           covers, and whether it is capped to a number of agencies. -->
+      <div class="plan">
+        <p class="plan__name">Lifetime</p>
+        <p class="plan__price plan__price--text">On request</p>
+        <p class="plan__alt">One-time payment. No renewals.</p>
+        <p class="plan__who">For agencies that would rather own it outright than carry another monthly line item.</p>
+        <p class="plan__intro">Everything in Pro, plus:</p>
+        <ul class="plan__features">
+          <li><span class="tick" aria-hidden="true">✓</span>Paid once — no renewals, no price rises</li>
+          <li><span class="tick" aria-hidden="true">✓</span>Every future update included</li>
+          <li><span class="tick" aria-hidden="true">✓</span>Onboarding and template migration done for you</li>
+          <li><span class="tick" aria-hidden="true">✓</span>A direct line to the team</li>
+        </ul>
+        <a class="btn btn--ghost btn--full" href="mailto:hello@parewa.com?subject=Parewa%20Lifetime%20%E2%80%94%20pricing">Contact us</a>
+      </div>
+
     </div>
 
     <p class="pricing__foot">
-      Extra seats at ₹249/user/month on either plan. All prices exclusive of GST. Annual plans
-      can be paid by UPI, card or NEFT.
+      Extra seats at ₹249/user/month on Starter and Pro. All prices exclusive of GST. Annual
+      plans can be paid by UPI, card or NEFT.
     </p>
 
     <div class="offer">

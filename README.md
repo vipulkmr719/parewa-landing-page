@@ -41,6 +41,7 @@ comments in the source.
 | Waitlist counter | `index.html`, `data-count="142"` on `#waitlistCount` | Set to the real number. It is social proof — it has to be true. |
 | Design partners | `index.html`, `.trust__partners` | Three agency names are placeholders. List only agencies that have agreed **in writing** to be named. |
 | Registered city | `index.html`, `[City], India` in the footer | Replace with the registered office city. |
+| Lifetime inclusions | `index.html`, the third `.plan` card | The price being on request is deliberate. The four bullets under it are **invented** — confirm what Lifetime actually covers, and whether it is capped to a number of agencies. |
 | Form endpoint | `assets/main.js`, `FORM_ENDPOINT` | Empty. See below. |
 
 ### The waitlist form
@@ -145,11 +146,21 @@ centred text past two lines slows reading and this page has a lot to say.
   yet", which is the wrong signal pre-launch.
 - **How it works** is the only place on the page that uses numbers, because it
   is the only part that is genuinely a sequence.
-- **Pricing** puts Pro slightly raised. The monthly/annual toggle defaults to
-  **monthly**, so the headline number is the ₹999 / ₹2,499 entry price and the
-  annual saving is offered as the upgrade — the sub-line under each price
-  carries it, and the toggle itself is labelled "2 months free". The ₹ is set at
-  the same weight and size as the number it belongs to.
+- **Pricing** is three plans with Pro raised in the middle. The monthly/annual
+  toggle defaults to **monthly**, so the headline number is the ₹999 / ₹2,499
+  entry price and the annual saving is offered as the upgrade — the sub-line
+  under each price carries it, and the toggle itself is labelled "2 months
+  free". The ₹ is set at the same weight and size as the number it belongs to.
+- **Lifetime** prices on request rather than showing a figure. `On request` sits
+  in the same slot as the numbers but at a quieter weight, so it reads as an
+  answer to the question rather than as a number — and `min-height` on
+  `.plan__price` keeps all three sub-lines on one line across the row. The
+  toggle does not apply to it (a hidden `aria-describedby` note says so for
+  screen readers, and the sub-line says "One-time payment" for everyone else).
+  Its CTA is a real `mailto:`, so it works with no backend.
+- Three cards orphan the third in an `auto-fit` grid at tablet widths, so the
+  grid is a fixed three columns down to 980px and a single stack below — three
+  columns any narrower leaves no room for the feature lists.
 - **Empty states** (in-app, decided here): the folded-paper mark with *"Nothing
   in flight yet. Start your first proposal."* This is where the bird earns its
   keep — not in the headlines.
