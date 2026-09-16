@@ -130,6 +130,27 @@
         with anything else or use them to build a profile of you.
       </p>
 
+      <h3>Page analytics</h3>
+      <p>
+        We use <strong>Vercel Web Analytics</strong> to see which pages people read. It is
+        cookieless and it is built not to identify you. With each page view it records: the
+        time, the URL and path, the referrer that sent you, filtered query parameters,
+        approximate location from geolocation, your device type, operating system and browser
+        with their versions, and the version of the analytics script itself.
+      </p>
+      <p>
+        What it does <em>not</em> do matters more. It sets <strong>no cookies</strong>. It
+        stores <strong>no IP address</strong>. It creates <strong>no persistent
+        identifier</strong> — instead a hash is derived from your request, and that hash is
+        discarded and reset every 24 hours, so you cannot be followed from one day to the next,
+        let alone from one website to another. We see counts and trends, not people.
+      </p>
+      <p>
+        The script is served from our own domain, so loading this page does not hand your
+        details to an outside address. Vercel processes the results for us as our hosting
+        provider — see section 6.
+      </p>
+
       <h3>When you email us</h3>
       <p>
         If you write to us, we keep the email. That is how conversations work. Please do not
@@ -138,22 +159,29 @@
 
       <h2 id="dont">3. What we don't do</h2>
       <p>
-        This section is short because the list is short, and we would rather state it plainly
-        than let you assume the worst.
+        We measure which pages get read, as section 2 describes. Here is everything we have
+        chosen not to do, stated plainly rather than left for you to assume the worst about.
       </p>
       <ul class="legal__list">
-        <li><strong>No cookies.</strong> This website sets none. Not for analytics, not for
-        preferences, not for anything.</li>
-        <li><strong>No analytics or tracking pixels.</strong> There is no Google Analytics, no
-        Meta pixel, no session recorder, no heatmap tool.</li>
-        <li><strong>No third-party requests at all.</strong> Every font, style and script on
-        this page is served from our own domain. Most sites load fonts from Google's servers,
-        which quietly hands your IP address to Google on every visit. Ours do not — that is
-        why we self-host them.</li>
-        <li><strong>No advertising networks</strong>, and no sale of personal data. We do not
-        sell your data, and we will not.</li>
-        <li><strong>No data brokers.</strong> We do not buy contact lists, and you will not
-        hear from us because someone sold us your address.</li>
+        <li><strong>No cookies.</strong> This website sets none at all — not for analytics,
+        not for preferences, not for anything. There is no cookie banner on this site because
+        there is nothing to consent to.</li>
+        <li><strong>No persistent identifier.</strong> Nothing we use assigns you an ID that
+        survives the day, so there is no thread to pull on that connects one of your visits to
+        another.</li>
+        <li><strong>No stored IP addresses</strong> in our analytics. Our host writes standard
+        server logs, described in section 2, and those rotate out.</li>
+        <li><strong>No cross-site tracking, and no advertising networks.</strong> Nothing here
+        follows you to another website, and nothing here exists to retarget you with ads.</li>
+        <li><strong>No session recorders or heatmaps.</strong> We do not replay your visit or
+        watch your mouse move.</li>
+        <li><strong>No fonts, styles or scripts from anyone else's servers.</strong> Every one
+        is served from our own domain. Most sites load fonts from Google, which quietly hands
+        your IP address to Google on every page load. Ours do not — that is precisely why we
+        self-host them.</li>
+        <li><strong>No sale of personal data</strong>, ever, and <strong>no data brokers</strong>.
+        We do not buy contact lists — you will not hear from us because somebody sold us your
+        address.</li>
       </ul>
 
       <h2 id="why">4. Why we collect it</h2>
@@ -167,6 +195,12 @@
         <li>Deciding the order in which we invite agencies in.</li>
       </ul>
       <p>
+        Separately, we use the aggregate analytics described in section 2 to understand which
+        parts of this site people actually read, so we can write better ones. That data is
+        counts and trends; it is not tied to you and we could not single you out from it if we
+        wanted to.
+      </p>
+      <p>
         Nothing else. We will not use your waitlist details for an unrelated purpose without
         asking you first. Every email we send you will have a working unsubscribe link, and
         unsubscribing does not remove you from the waitlist — it just stops the updates.
@@ -179,6 +213,9 @@
         first. After that we delete them.</li>
         <li><strong>Server logs</strong> — [LOG RETENTION PERIOD, e.g. 30 days], then they
         rotate out automatically.</li>
+        <li><strong>Analytics</strong> — the daily hash is discarded after 24 hours. The
+        aggregate page statistics are kept for [ANALYTICS RETENTION — depends on your Vercel
+        plan], and they do not identify anyone.</li>
         <li><strong>Emails you send us</strong> — as long as the conversation is live, and for
         a reasonable period after.</li>
       </ul>
@@ -193,8 +230,8 @@
         on our instructions. As of the date above they are:
       </p>
       <ul class="legal__list">
-        <li><strong>[HOSTING PROVIDER]</strong> — serves this website and holds the server
-        logs described in section 2.</li>
+        <li><strong>Vercel</strong> — hosts this website, holds the server logs described in
+        section 2, and processes the page analytics described there.</li>
         <li><strong>[FORM / EMAIL PROVIDER]</strong> — receives the waitlist form and stores
         the list we email.</li>
       </ul>
