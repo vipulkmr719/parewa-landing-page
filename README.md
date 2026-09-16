@@ -43,20 +43,50 @@ comments in the source.
 | Design partners | `index.html`, `.trust__partners` | Three agency names are placeholders. List only agencies that have agreed **in writing** to be named. |
 | Registered city | `index.html`, `[City], India` in the footer | Replace with the registered office city. |
 | Lifetime inclusions | `index.html`, the third `.plan` card | The price being on request is deliberate. The four bullets under it are **invented** — confirm what Lifetime actually covers, and whether it is capped to a number of agencies. |
-| Form endpoint | `assets/main.js`, `FORM_ENDPOINT` | Empty. See below. |
+| Zoho credentials | Vercel env vars | Four of them. The form is wired but cannot write until they are set — see below. |
 | Privacy policy blanks | `privacy.html` | Bracketed placeholders: `[DATE]`, `[LEGAL ENTITY NAME]`, `[REGISTERED ADDRESS]`, `[LOG RETENTION PERIOD]`, `[ANALYTICS RETENTION]`, `[FORM / EMAIL PROVIDER]`, `[GRIEVANCE OFFICER NAME]`. **Have a lawyer review the whole document** — it makes binding representations. |
 
-### The waitlist form
+### The waitlist form → Zoho Sheet
 
-`FORM_ENDPOINT` at the top of `assets/main.js` is empty. While it stays empty
-the form validates input and then hands off to the visitor's mail client with
-the details pre-filled — which still reaches you, and does not pretend to have
-saved anything it hasn't.
+Signups go to `/api/waitlist` (a Vercel Serverless Function, `api/waitlist.js`),
+which appends a row to a Zoho Sheet.
 
-Set it to any endpoint that accepts a JSON `POST` of
-`{ email, agency, volume }` — Formspree, Buttondown, a Cloudflare Worker, your
-own API. On a non-2xx response the form tells the visitor to email instead,
-rather than silently dropping the signup.
+The function sits on our own domain deliberately. The browser posts to us and
+*we* talk to Zoho, which means the Zoho credentials never ship in public
+JavaScript, there is no CORS problem, and — the part that matters for the
+privacy policy — the visitor's browser still contacts nobody but us.
+
+**Set these in Vercel → Settings → Environment Variables.** Never in a file.
+
+| Variable | Where it comes from |
+|---|---|
+| `ZOHO_CLIENT_ID` | api-console.zoho.in → create a **Self Client** |
+| `ZOHO_CLIENT_SECRET` | same screen |
+| `ZOHO_REFRESH_TOKEN` | generate a code with scope `ZohoSheet.dataAPI.UPDATE`, then exchange it for a refresh token |
+| `ZOHO_SHEET_RESOURCE_ID` | the long id in your sheet's URL |
+| `ZOHO_WORKSHEET_NAME` | optional, defaults to `Sheet1` |
+| `ZOHO_DC` | optional, defaults to `in` |
+
+**The sheet's first row must carry these exact headers.** Zoho matches on the
+column names and rejects the write if none line up:
+
+```
+Email | Agency | Proposals per month | Joined at
+```
+
+Until the variables are set the function answers `503` and the form falls back
+to the visitor's mail client, so a signup is never silently lost. Same on a
+write failure: the visitor is told to email rather than being shown a success
+message for something that did not save.
+
+**Do not publish the sheet.** Zoho's *Publish* feature makes a sheet readable by
+anyone with the link, and this one holds email addresses. Share it with named
+people instead.
+
+Spam: the endpoint is public, so both forms carry a honeypot field — hidden
+off-screen and from assistive tech. Anything that fills it gets a `200` and is
+discarded. There is no rate limiting; if signups start getting abused, that
+needs a KV store or Vercel's own protection.
 
 ### Also worth doing before launch
 

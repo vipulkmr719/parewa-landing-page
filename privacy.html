@@ -113,6 +113,8 @@
       <p>Three things, all of them typed in by you:</p>
       <ul class="legal__list">
         <li><strong>Your work email address</strong> — so we can tell you when access opens.</li>
+        <li><strong>The date and time you joined</strong> — recorded automatically, so we know
+        the order to invite agencies in.</li>
         <li><strong>Your agency name</strong> — so we know who you are.</li>
         <li><strong>Roughly how many proposals you send a month</strong> — a range, chosen from
         a dropdown, so we know who to open access to first.</li>
@@ -232,8 +234,10 @@
       <ul class="legal__list">
         <li><strong>Vercel</strong> — hosts this website, holds the server logs described in
         section 2, and processes the page analytics described there.</li>
-        <li><strong>[FORM / EMAIL PROVIDER]</strong> — receives the waitlist form and stores
-        the list we email.</li>
+        <li><strong>Zoho</strong> — stores the waitlist itself. When you submit the form,
+        your browser sends it to us, and our own server passes it to Zoho Sheet. Your browser
+        never talks to Zoho directly, so nothing about your visit reaches them beyond the
+        three things you typed.</li>
       </ul>
       <p>
         Beyond those, we disclose personal data only where we are legally compelled to — a

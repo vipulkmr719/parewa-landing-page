@@ -1244,6 +1244,16 @@ strong{ font-weight:600; }
 .form__note{ font-size:.75rem; color:var(--slate-soft); }
 .final .form__note{ color:rgba(247,248,247,.62); }
 
+/* Honeypot. Off-screen rather than display:none — some bots skip fields that
+   are display:none, and this one is meant to be irresistible. Hidden from
+   assistive tech too, so nobody is ever asked to fill it in. */
+.honeypot{
+  position:absolute;
+  left:-9999px;
+  width:1px; height:1px;
+  overflow:hidden;
+}
+
 .form__status{
   font-size:var(--t-small);
   border-radius:var(--radius-sm);

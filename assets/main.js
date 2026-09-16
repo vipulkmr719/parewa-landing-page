@@ -6,12 +6,16 @@
   'use strict';
 
   /* ------------------------------------------------------------------
-     Where waitlist signups go.
-     Set this to your form endpoint (Formspree, Buttondown, your own API…)
-     before deploying. While it is empty the form falls back to opening the
-     visitor's mail client — honest, and it still reaches you.
+     Where waitlist signups go: our own serverless function, which appends a
+     row to the Zoho Sheet. Deliberately same-origin — the browser never talks
+     to Zoho, so no credentials ship in this file and no third party sees a
+     visitor. See api/waitlist.js, and the README for the environment
+     variables it needs.
+
+     If those variables are not set the function answers 503 and the form
+     falls back to the visitor's mail client rather than losing the signup.
      ------------------------------------------------------------------ */
-  const FORM_ENDPOINT = '';
+  const FORM_ENDPOINT = '/api/waitlist';
   const CONTACT_EMAIL = 'hello@parewa.com';
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -192,6 +196,20 @@
      7. Waitlist form
      ================================================================== */
 
+  // Used when the endpoint is absent or unconfigured. Honest: it does not
+  // claim to have saved anything, and the signup still reaches us.
+  function mailtoFallback(data, say) {
+    const subject = encodeURIComponent('Waitlist: ' + data.agency);
+    const body = encodeURIComponent(
+      'Agency: ' + data.agency + '\n' +
+      'Email: ' + data.email + '\n' +
+      'Proposals per month: ' + data.volume + '\n\n' +
+      'Please add us to the Parewa waitlist.'
+    );
+    say('ok', 'Opening your email app — send that message and you’re on the list.');
+    window.location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + subject + '&body=' + body;
+  }
+
   function wireForms() {
     $$('[data-waitlist-form]').forEach(form => {
       const status = $('[data-form-status]', form);
@@ -209,7 +227,9 @@
         const data = {
           email:  (form.elements.email.value || '').trim(),
           agency: (form.elements.agency.value || '').trim(),
-          volume: form.elements.volume ? form.elements.volume.value : ''
+          volume: form.elements.volume ? form.elements.volume.value : '',
+          // Honeypot. Hidden from people, irresistible to bots.
+          website: form.elements.website ? form.elements.website.value : ''
         };
 
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(data.email)) {
@@ -223,19 +243,8 @@
           return;
         }
 
-        // No endpoint wired yet — hand off to the visitor's mail client.
-        if (!FORM_ENDPOINT) {
-          const subject = encodeURIComponent('Waitlist: ' + data.agency);
-          const body = encodeURIComponent(
-            'Agency: ' + data.agency + '\n' +
-            'Email: ' + data.email + '\n' +
-            'Proposals per month: ' + data.volume + '\n\n' +
-            'Please add us to the Parewa waitlist.'
-          );
-          say('ok', 'Opening your email app — send that message and you’re on the list.');
-          window.location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + subject + '&body=' + body;
-          return;
-        }
+        // No endpoint wired — hand off to the visitor's mail client.
+        if (!FORM_ENDPOINT) { mailtoFallback(data, say); return; }
 
         if (submit) { submit.disabled = true; submit.textContent = 'Joining…'; }
 
@@ -245,7 +254,17 @@
             headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
             body: JSON.stringify(data)
           });
-          if (!res.ok) throw new Error('Request failed: ' + res.status);
+          if (res.status === 503) { mailtoFallback(data, say); return; }
+
+          if (!res.ok) {
+            let msg = 'Something went wrong on our end. Email ' + CONTACT_EMAIL + ' and we’ll add you by hand.';
+            if (res.status === 400) {
+              const body = await res.json().catch(function () { return {}; });
+              if (body.error) msg = body.error;
+            }
+            say('error', msg);
+            return;
+          }
 
           form.reset();
           say('ok', 'You’re on the list. We’ll email you the moment your access opens.');
