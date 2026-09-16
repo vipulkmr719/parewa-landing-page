@@ -19,7 +19,8 @@ everything except the webfonts — use a server if you want to see the real type
 ## Layout of the repo
 
 ```
-index.html              the whole page
+index.html              the landing page
+privacy.html            privacy policy — DPDP Act, 2023
 assets/
   styles.css            design system + components, in source order
   main.js               hero sequence, pricing toggle, waitlist form
@@ -43,6 +44,7 @@ comments in the source.
 | Registered city | `index.html`, `[City], India` in the footer | Replace with the registered office city. |
 | Lifetime inclusions | `index.html`, the third `.plan` card | The price being on request is deliberate. The four bullets under it are **invented** — confirm what Lifetime actually covers, and whether it is capped to a number of agencies. |
 | Form endpoint | `assets/main.js`, `FORM_ENDPOINT` | Empty. See below. |
+| Privacy policy blanks | `privacy.html` | Six bracketed placeholders: `[DATE]`, `[LEGAL ENTITY NAME]`, `[REGISTERED ADDRESS]`, `[LOG RETENTION PERIOD]`, `[HOSTING PROVIDER]`, `[FORM / EMAIL PROVIDER]`, `[GRIEVANCE OFFICER NAME]`. **Have a lawyer review the whole document** — it makes binding representations. |
 
 ### The waitlist form
 
@@ -66,8 +68,9 @@ rather than silently dropping the signup.
 - **Buy the near-misses** — pariwa / parewaa / paruwa — and redirect them.
 - **An OG image.** `og:image` is not set; there is no artwork for it yet. A
   1200×630 of the hero demo would do it.
-- **Legal pages.** `/privacy`, `/terms`, `/refunds`, `/about`, `/blog` are
-  linked from the footer and do not exist yet.
+- **The rest of the legal pages.** `/terms`, `/refunds`, `/about` and `/blog`
+  are linked from the footer and do not exist yet. The privacy policy does —
+  see below.
 
 ---
 
@@ -245,6 +248,38 @@ Any static host. Two things worth getting right:
   They never change without their filename changing.
 
 ---
+
+## The privacy policy
+
+`privacy.html` is written against India's Digital Personal Data Protection Act,
+2023 — your users are Data Principals, you are the Data Fiduciary, and the
+document is structured around what that Act actually requires: notice of
+purpose, consent, retention periods, the six Data Principal rights, a named
+grievance officer with response times, and breach notification.
+
+It describes **what this site actually does**, not boilerplate. That was worth
+doing because the site's privacy position is unusually strong and specific:
+
+- No cookies. None at all.
+- No analytics, no tracking pixels, no session recording.
+- **No third-party requests of any kind.** Self-hosting the fonts means Google
+  never sees a visitor's IP — most sites leak that on every page load without
+  realising. The policy says so explicitly, because it is a real difference and
+  it is checkable from the page source.
+- The waitlist form has exactly three fields and no hidden ones.
+
+Two things to keep in step with it:
+
+- **If you add analytics later, the policy becomes false.** Section 3 makes
+  flat factual claims. Adding so much as a Google Font or a Meta pixel means
+  editing that section the same day.
+- **Section 7 is forward-looking.** It states the commitments the landing page
+  already makes about proposals and client data — content ownership, no model
+  training, export, deletion — and says plainly that the product has not
+  launched. Republish with real product detail before anyone's first proposal.
+
+It is a solid, accurate draft. It is not legal advice, and it has not been
+reviewed by a lawyer.
 
 ## Copy
 
