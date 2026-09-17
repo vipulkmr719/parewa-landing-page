@@ -173,7 +173,7 @@ h4{ font-size:var(--t-lead);    line-height:1.3; }
    re-wrapped the moment the real font arrived, which is where this page's
    layout shift was coming from. em depends only on font-size, so it holds. */
 
-p{ margin:0 0 1em; max-width:34em; }
+p{ margin:0 0 1em; max-width:34em; text-wrap:pretty; }
 p:last-child{ margin-bottom:0; }
 
 a{ color:var(--wing); text-decoration-thickness:1px; text-underline-offset:3px; }
@@ -418,6 +418,11 @@ strong{ font-weight:600; }
   margin:0;
   max-width:none;
 }
+
+/* The proposal beside it is the taller pane. Centring the brief's content
+   under its label turns one dead hole into even breathing room, and keeps
+   the two pane labels on the same line. */
+.brief__inner{ margin-block:auto; }
 .brief__caret{
   display:none;
 }
@@ -444,8 +449,8 @@ strong{ font-weight:600; }
 /* The action that turns the brief into the proposal. Anchored to the foot of
    the pane so the panel reads as a filled input side, not a half-empty box. */
 .brief__action{
-  margin-top:auto;
-  padding-top:1.25rem;
+  margin-top:1.5rem;
+  padding-top:0;
   display:flex;
   align-items:center;
   gap:.75rem;
@@ -791,11 +796,15 @@ strong{ font-weight:600; }
   display:grid;
   grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);
   gap:clamp(2rem,1rem + 4vw,4.5rem);
-  align-items:center;
+  align-items:start;   /* flush tops read as deliberate; centred read as ragged */
   padding-block:clamp(2.5rem,1.8rem + 3vw,4rem);
   border-top:1px solid var(--rule);
 }
-.feature:first-of-type{ border-top:none; }
+.feature:first-of-type{
+  border-top:none;
+  padding-top:clamp(2rem,1.5rem + 2vw,3rem);
+}
+.features{ margin-top:0; }
 .feature--flip .feature__copy{ order:2; }
 .feature__copy h3{ max-width:12.2em; }
 .feature__copy p{
@@ -1065,7 +1074,7 @@ strong{ font-weight:600; }
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:1.25rem;
-  align-items:start;
+  align-items:stretch;   /* equal heights, so every CTA lands on one line */
 }
 @media (max-width:980px){
   .plans{ grid-template-columns:minmax(0,1fr); }
@@ -1078,6 +1087,23 @@ strong{ font-weight:600; }
   display:flex;
   flex-direction:column;
 }
+/* Only Pro carries a marker, but every card reserves the slot — otherwise the
+   chip shunts Pro's name, price and rule down and the three columns stop
+   lining up with each other. */
+.plan::before{
+  content:"";
+  display:block;
+  height:1.4rem;
+  margin-bottom:.875rem;
+}
+.plan--pro::before{ display:none; }
+
+/* Stacked, there is nothing to line the cards up with, so the reserved slot
+   would just be dead space at the top of two of them. This has to sit after
+   the rule above to beat it — same specificity, later wins. */
+@media (max-width:980px){
+  .plan::before{ display:none; }
+}
 .plan--pro{
   border-color:var(--wing);
   box-shadow:0 1px 0 var(--wing);
@@ -1087,6 +1113,7 @@ strong{ font-weight:600; }
 
 .plan__marker{
   display:inline-block;
+  line-height:1.2;       /* deterministic height, to match the reserved slot */
   font-size:.75rem;
   font-weight:600;
   color:var(--wing);
@@ -1178,6 +1205,8 @@ strong{ font-weight:600; }
   line-height:1.3;
 }
 .faq summary::-webkit-details-marker{ display:none; }
+.faq summary:hover{ color:var(--wing); }
+.faq summary:hover::after{ border-color:var(--wing); }
 .faq summary::after{
   content:"";
   margin-left:auto;
