@@ -43,66 +43,71 @@ comments in the source.
 | Design partners | `index.html`, `.trust__partners` | Three agency names are placeholders. List only agencies that have agreed **in writing** to be named. |
 | Registered city | `index.html`, `[City], India` in the footer | Replace with the registered office city. |
 | Lifetime inclusions | `index.html`, the third `.plan` card | The price being on request is deliberate. The four bullets under it are **invented** — confirm what Lifetime actually covers, and whether it is capped to a number of agencies. |
-| Zoho credentials | Vercel env vars | Four of them. The form is wired but cannot write until they are set — see below. |
+| Sheet webhook | Vercel env vars | `SHEET_WEBHOOK_URL` and `SHEET_SHARED_SECRET`. The form is wired but cannot write until they are set — see below. |
 | Privacy policy blanks | `privacy.html` | Bracketed placeholders: `[DATE]`, `[LEGAL ENTITY NAME]`, `[REGISTERED ADDRESS]`, `[LOG RETENTION PERIOD]`, `[ANALYTICS RETENTION]`, `[FORM / EMAIL PROVIDER]`, `[GRIEVANCE OFFICER NAME]`. **Have a lawyer review the whole document** — it makes binding representations. |
 
-### The waitlist form → Zoho Sheet
+### The waitlist form → Google Sheet
 
 Signups go to `/api/waitlist` (a Vercel Serverless Function, `api/waitlist.js`),
-which appends a row to a Zoho Sheet.
+which forwards them to an Apps Script web app that appends a row to the sheet.
 
 The function sits on our own domain deliberately. The browser posts to us and
-*we* talk to Zoho, which means the Zoho credentials never ship in public
-JavaScript, there is no CORS problem, and — the part that matters for the
-privacy policy — the visitor's browser still contacts nobody but us.
+*we* call the sheet, which means the endpoint that can write to your data never
+ships in public JavaScript, there is no CORS problem, and — the part that
+matters for the privacy policy — the visitor's browser still contacts nobody
+but us.
 
-**Set these in Vercel → Settings → Environment Variables.** Never in a file.
+**A published `/pubhtml` link cannot be the destination.** That is Google's
+*Publish to the web* output: it renders a read-only view and accepts no writes.
+Something has to be able to receive a row, which is what the Apps Script does.
 
-| Variable | Where it comes from |
+#### Setup
+
+`api/google-apps-script.gs` carries the script and step-by-step instructions in
+its header. Short version:
+
+1. In the Sheet: **Extensions → Apps Script**, paste the file in, change
+   `SHARED_SECRET` to a long random string of your own.
+2. **Deploy → New deployment → Web app**, execute as *Me*, access *Anyone*.
+3. Copy the `/exec` URL.
+4. In **Vercel → Settings → Environment Variables**:
+
+| Variable | Value |
 |---|---|
-| `ZOHO_CLIENT_ID` | api-console.zoho.in → create a **Self Client** |
-| `ZOHO_CLIENT_SECRET` | same screen |
-| `ZOHO_REFRESH_TOKEN` | generate a code with scope `ZohoSheet.dataAPI.UPDATE`, then exchange it for a refresh token |
-| `ZOHO_SHEET_RESOURCE_ID` | the long id in your sheet's URL |
-| `ZOHO_WORKSHEET_NAME` | optional, defaults to `Sheet1` |
-| `ZOHO_DC` | optional, defaults to `in` |
+| `SHEET_WEBHOOK_URL` | the `/exec` URL from step 3 |
+| `SHEET_SHARED_SECRET` | the same string you put in `SHARED_SECRET` |
 
-**The sheet's first row must carry these exact headers.** Zoho matches on the
-column names and rejects the write if none line up:
+5. Redeploy so the variables are picked up.
 
-```
-Email | Agency | Proposals per month | Joined at
-```
+The header row is written automatically on the first signup, so there is
+nothing to set up by hand in the sheet.
 
-Until the variables are set the function answers `503` and the form falls back
-to the visitor's mail client, so a signup is never silently lost. Same on a
-write failure: the visitor is told to email rather than being shown a success
-message for something that did not save.
+**The secret is not optional.** The web app has to be open to "Anyone" —
+Vercel calls it without a Google login — so that shared secret is the only
+thing between the `/exec` URL and your sheet.
 
-**Do not publish the sheet.** Zoho's *Publish* feature makes a sheet readable by
-anyone with the link, and this one holds email addresses. Share it with named
-people instead.
+Because the destination is a plain JSON webhook, a Zapier / Make / n8n catch
+hook works here too; only `SHEET_WEBHOOK_URL` changes.
+
+#### How it fails
+
+Until `SHEET_WEBHOOK_URL` is set the function answers `503` and the form falls
+back to the visitor's mail client, so a signup is never silently lost. On a
+write failure the visitor is told to email rather than shown a success message
+for something that did not save.
+
+Apps Script **cannot set an HTTP status code**, so a refusal arrives as `200`
+with `ok:false` in the body. The function checks the body, not just the status
+— otherwise a rejected row would look like a successful one.
+
+**Do not publish the sheet.** Google's *Publish to the web* makes it readable
+by anyone with the link, and this one holds email addresses. Share it with
+named people instead.
 
 Spam: the endpoint is public, so both forms carry a honeypot field — hidden
 off-screen and from assistive tech. Anything that fills it gets a `200` and is
 discarded. There is no rate limiting; if signups start getting abused, that
 needs a KV store or Vercel's own protection.
-
-### Also worth doing before launch
-
-- **The name.** Parewa Labs (parewalabs.com, the Programiz people) and Parewa
-  Inc are existing Nepali software companies. Neither is in proposal software,
-  but `parewa.com` and the obvious handles may be contested, and early Google
-  results will be crowded. Search Class 9 and Class 42 on ipindia.gov.in before
-  anything is printed.
-- **Buy the near-misses** — pariwa / parewaa / paruwa — and redirect them.
-- **An OG image.** `og:image` is not set; there is no artwork for it yet. A
-  1200×630 of the hero demo would do it.
-- **The rest of the legal pages.** `/terms`, `/refunds`, `/about` and `/blog`
-  are linked from the footer and do not exist yet. The privacy policy does —
-  see below.
-
----
 
 ## Design decisions
 

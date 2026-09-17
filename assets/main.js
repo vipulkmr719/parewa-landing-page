@@ -7,10 +7,10 @@
 
   /* ------------------------------------------------------------------
      Where waitlist signups go: our own serverless function, which appends a
-     row to the Zoho Sheet. Deliberately same-origin — the browser never talks
-     to Zoho, so no credentials ship in this file and no third party sees a
-     visitor. See api/waitlist.js, and the README for the environment
-     variables it needs.
+     row to the Google Sheet. Deliberately same-origin — the browser never
+     talks to Google, so nothing that can write to the sheet ships in this
+     file and no third party sees a visitor. See api/waitlist.js, and the
+     README for the environment variables it needs.
 
      If those variables are not set the function answers 503 and the form
      falls back to the visitor's mail client rather than losing the signup.
