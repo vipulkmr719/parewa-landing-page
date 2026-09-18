@@ -118,7 +118,7 @@ export default function WaitlistForm({ idPrefix, note }) {
           that say actually arrives. */}
       <div className="field">
         <label htmlFor={`${idPrefix}-suggestion`}>
-          What should we build first? <span className="field__optional">optional</span>
+          your suggestions <span className="field__optional">optional</span>
         </label>
         <textarea
           id={`${idPrefix}-suggestion`}
