@@ -1,33 +1,41 @@
 # Parewa — landing page
 
-Static landing page for Parewa, AI proposal software for Indian digital agencies.
+Landing page for Parewa, AI proposal software for Indian digital agencies.
 
 **Tagline:** Proposals that come back with an answer.
 
-No build step, no dependencies. `index.html` plus three assets. Open the file,
-or serve the directory with anything.
+Next.js (App Router) on React 19. Both pages are prerendered to static HTML,
+so first paint does not wait on JavaScript.
 
 ```
-python3 -m http.server 8000     # then open http://localhost:8000
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build
+npm start        # serve the production build
 ```
 
-Fonts are fetched with `crossorigin`-free relative URLs, so `file://` works for
-everything except the webfonts — use a server if you want to see the real type.
+Vercel deploys it with no configuration: it detects Next, prerenders the two
+pages, and turns `app/api/waitlist/route.js` into a serverless function at
+`/api/waitlist` — the same path the form has always posted to, so the
+environment variables and the Apps Script do not change.
 
 ---
 
 ## Layout of the repo
 
 ```
-index.html              the landing page
-privacy.html            privacy policy — DPDP Act, 2023
-assets/
-  styles.css            design system + components, in source order
-  main.js               hero sequence, pricing toggle, waitlist form
-  logo.svg              the mark, full colour
-  logo-mono.svg         single colour, inherits currentColor
-  favicon.svg           the mark on a Wing-blue tile
-  fonts/*.woff2         self-hosted, subset (see Performance)
+app/
+  layout.jsx            <html>, metadata, the js class
+  page.jsx              the landing page
+  privacy/page.jsx      privacy policy — DPDP Act, 2023
+  api/waitlist/route.js POST endpoint → Google Sheet
+  globals.css           the whole design system
+components/             one per section, plus the waitlist pieces
+public/
+  assets/fonts/*.woff2  self-hosted, subset (see Performance)
+  *.svg                 logo, mono logo, favicon
+scripts/
+  google-apps-script.gs goes in the Google Sheet, not deployed
 ```
 
 ---
@@ -48,7 +56,7 @@ comments in the source.
 
 ### The waitlist form → Google Sheet
 
-Signups go to `/api/waitlist` (a Vercel Serverless Function, `api/waitlist.js`),
+Signups go to `/api/waitlist` (`app/api/waitlist/route.js`, a Next route handler Vercel runs as a serverless function),
 which forwards them to an Apps Script web app that appends a row to the sheet.
 
 The function sits on our own domain deliberately. The browser posts to us and
@@ -63,7 +71,7 @@ Something has to be able to receive a row, which is what the Apps Script does.
 
 #### Setup
 
-`api/google-apps-script.gs` carries the script and step-by-step instructions in
+`scripts/google-apps-script.gs` carries the script and step-by-step instructions in
 its header. Short version:
 
 1. In the Sheet: **Extensions → Apps Script**, paste the file in, change
@@ -240,8 +248,15 @@ agency owner opening a WhatsApp link on patchy mobile data.
 | Cumulative layout shift | **0.001 – 0.012** (good is under 0.1) |
 | Transferred | **~84 KB** — 7 KB HTML, 7 KB CSS, 3 KB JS, 68 KB fonts |
 
-Three decisions got it there, each of which changed the numbers enough to be
-worth writing down.
+**These figures are from the static build this started as.** Moving to React
+cost roughly +400 ms of first paint and +140 KB, almost all of it the React and
+Next runtime rather than anything in `components/`. Measured on the same
+throttle: FCP 1.31 s → 1.72 s, transfer 94 KB → 232 KB (gzip; Vercel serves
+brotli, which takes the JS from 177 KB to 153 KB). The mitigations below still
+apply and are still doing their job — CLS is unchanged at 0.0004.
+
+Three decisions got the original there, each of which changed the numbers
+enough to be worth writing down.
 
 **Fonts are self-hosted and subset, not loaded from Google.** The CDN costs two
 extra DNS + TLS handshakes before first paint, which is the wrong trade on a
