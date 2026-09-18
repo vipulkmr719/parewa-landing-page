@@ -45,6 +45,9 @@ export async function POST(request) {
   const email = String(payload.email || '').trim().slice(0, 254);
   const agency = String(payload.agency || '').trim().slice(0, 200);
   const volume = String(payload.volume || '').trim().slice(0, 50);
+  // Free text, so the cap is the server's to enforce — the client's maxLength
+  // is a courtesy to the person typing, not a control.
+  const suggestion = String(payload.suggestion || '').trim().slice(0, 1000);
 
   // Never trust the client's validation — it is the easiest thing to bypass.
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
@@ -66,6 +69,7 @@ export async function POST(request) {
         email,
         agency,
         volume,
+        suggestion,
         joinedAt: new Date().toISOString(),
       }),
       signal: controller.signal,

@@ -7,8 +7,7 @@ export default function SiteFooter({ minimal = false }) {
       <footer className="site-footer">
         <div className="wrap">
           <div className="footer__base">
-            {/* TODO before launch: replace [City] with the registered office city. */}
-            <span><a href="mailto:hello@parewa.com">hello@parewa.com</a> · [City], India</span>
+            <span><a href="mailto:hello@parewa.com">hello@parewa.com</a> · India</span>
             <span>© 2026 Parewa. All rights reserved.</span>
             <span><a href="/">Home</a> · <a href="/privacy">Privacy</a></span>
           </div>
@@ -59,9 +58,8 @@ export default function SiteFooter({ minimal = false }) {
           </div>
         </div>
 
-        {/* TODO before launch: replace [City] with the registered office city. */}
         <div className="footer__base">
-          <span><a href="mailto:hello@parewa.com">hello@parewa.com</a> · [City], India</span>
+          <span><a href="mailto:hello@parewa.com">hello@parewa.com</a> · India</span>
           <span>© 2026 Parewa. All rights reserved.</span>
         </div>
       </div>

@@ -11,6 +11,7 @@ const FORM_ENDPOINT = '/api/waitlist';
 const CONTACT_EMAIL = 'hello@parewa.com';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const SUGGESTION_MAX = 1000;
 
 export default function WaitlistForm({ idPrefix, note }) {
   const [status, setStatus] = useState({ state: null, message: '' });
@@ -22,8 +23,9 @@ export default function WaitlistForm({ idPrefix, note }) {
   const mailtoFallback = (data) => {
     const subject = encodeURIComponent(`Waitlist: ${data.agency}`);
     const body = encodeURIComponent(
-      `Agency: ${data.agency}\nEmail: ${data.email}\nProposals per month: ${data.volume}\n\n` +
-        'Please add us to the Parewa waitlist.'
+      `Agency: ${data.agency}\nEmail: ${data.email}\nProposals per month: ${data.volume}\n` +
+        (data.suggestion ? `\nWhat we'd want built first:\n${data.suggestion}\n` : '') +
+        '\nPlease add us to the Parewa waitlist.'
     );
     setStatus({ state: 'ok', message: 'Opening your email app — send that message and you’re on the list.' });
     window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
@@ -36,6 +38,9 @@ export default function WaitlistForm({ idPrefix, note }) {
       email: (form.elements.email.value || '').trim(),
       agency: (form.elements.agency.value || '').trim(),
       volume: form.elements.volume ? form.elements.volume.value : '',
+      suggestion: form.elements.suggestion
+        ? (form.elements.suggestion.value || '').trim().slice(0, SUGGESTION_MAX)
+        : '',
       // Honeypot. Hidden from people, irresistible to bots.
       website: form.elements.website ? form.elements.website.value : '',
     };
@@ -106,6 +111,22 @@ export default function WaitlistForm({ idPrefix, note }) {
           <option>16–30</option>
           <option>30+</option>
         </select>
+      </div>
+
+      {/* Optional, and last, so it never stands between anyone and the button.
+          The waitlist promise is "a say in what we build next" — this is where
+          that say actually arrives. */}
+      <div className="field">
+        <label htmlFor={`${idPrefix}-suggestion`}>
+          What should we build first? <span className="field__optional">optional</span>
+        </label>
+        <textarea
+          id={`${idPrefix}-suggestion`}
+          name="suggestion"
+          rows={3}
+          maxLength={SUGGESTION_MAX}
+          placeholder="The one thing that would save you the most time"
+        />
       </div>
 
       <div className="honeypot" aria-hidden="true">

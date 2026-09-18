@@ -10,14 +10,16 @@ export default function Faq() {
   return (
     <section className="section" id="faq">
       <div className="wrap">
-        <h2 className="section__head">Questions agency owners ask us</h2>
-        <div className="faq">
-          {QUESTIONS.map(([q, a]) => (
-            <details key={q}>
-              <summary>{q}</summary>
-              <p>{a}</p>
-            </details>
-          ))}
+        <div className="section__intro section__intro--faq">
+          <h2 className="section__head">Questions agency owners ask us</h2>
+          <div className="faq">
+            {QUESTIONS.map(([q, a]) => (
+              <details key={q}>
+                <summary>{q}</summary>
+                <p>{a}</p>
+              </details>
+            ))}
+          </div>
         </div>
       </div>
     </section>
