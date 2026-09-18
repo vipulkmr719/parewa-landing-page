@@ -1,18 +1,3 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-
-  "//": [
-    "framework overrides the Framework Preset stored in the dashboard, which is",
-    "the whole point of this file: the project was imported when the repo was",
-    "plain HTML and its stored preset does not describe a Next app.",
-    "",
-    "Nothing else belongs here. Build Command and Output Directory are left out",
-    "deliberately, not forgotten — with a framework set, Vercel's Next",
-    "integration resolves both, and naming an output directory makes it treat",
-    "the build as static output and drop the serverless route behind",
-    "/api/waitlist. null is not the same as omitting: for framework, null means",
-    "the preset 'Other'."
-  ],
-
   "framework": "nextjs"
 }

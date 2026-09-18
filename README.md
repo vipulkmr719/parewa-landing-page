@@ -23,12 +23,19 @@ detection. This project was first imported when the repo was plain HTML, so
 Vercel stored a preset for a static site and does not revisit that choice on
 its own — which is how a build can succeed and still serve a 404.
 
-It sets the framework and nothing else. Build Command and Output Directory
-are omitted on purpose: Vercel's Next integration resolves both, and naming
-an output directory makes it treat the build as static output, which would
-drop the serverless route behind `/api/waitlist`. Note that omitting a field
-is not the same as setting it to `null` — for `framework`, `null` selects the
-preset "Other".
+The file is one line long, and the reasons it is that short live here because
+they cannot live in it:
+
+- **It sets the framework and nothing else.** Vercel's Next integration
+  resolves the build command and the output directory; naming an output
+  directory makes Vercel treat the build as static output, which would drop
+  the serverless route behind `/api/waitlist`.
+- **Omitting a field is not the same as setting it to `null`.** Vercel reads
+  `null` as a value, not an absence — for `framework` it selects the preset
+  "Other".
+- **There are no comments in it.** Vercel validates `vercel.json` against a
+  schema with `additionalProperties: false`, so a `"//"` key fails the
+  deployment rather than being ignored.
 
 `vercel.json` cannot clear an Output Directory that is set explicitly in the
 dashboard. If a deploy fails with *No Output Directory named "build" found*,
