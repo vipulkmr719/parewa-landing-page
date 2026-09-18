@@ -14,10 +14,16 @@ npm run build    # production build
 npm start        # serve the production build
 ```
 
-Vercel deploys it with no configuration: it detects Next, prerenders the two
-pages, and turns `app/api/waitlist/route.js` into a serverless function at
-`/api/waitlist` — the same path the form has always posted to, so the
-environment variables and the Apps Script do not change.
+Vercel prerenders the two pages and turns `app/api/waitlist/route.js` into a
+serverless function at `/api/waitlist` — the same path the form has always
+posted to, so the environment variables and the Apps Script do not change.
+
+`vercel.json` pins the framework to `nextjs` rather than leaving it to
+detection. This project was first imported when the repo was plain HTML, so
+Vercel stored a preset for a static site and does not revisit that choice on
+its own. Pinning it in the repo also discards any Build Command or Output
+Directory left over in the dashboard, which is the kind of state that drifts
+out of sight and makes a deploy succeed while serving the wrong thing.
 
 ---
 
@@ -36,6 +42,8 @@ public/
   *.svg                 logo, mono logo, favicon
 scripts/
   google-apps-script.gs goes in the Google Sheet, not deployed
+next.config.mjs         long cache headers for the fonts
+vercel.json             pins the framework so the dashboard cannot drift
 ```
 
 ---
@@ -290,12 +298,15 @@ than `wdth` 100 and a single adjust cannot serve both.
 
 ### Deploying
 
-Any static host. Two things worth getting right:
+Needs a host that runs Next, not a static bucket: `/api/waitlist` is a server
+route. Vercel is what this is configured for, via `vercel.json`. Two things
+that host has to get right, both of which Vercel already does:
 
 - **Serve the text files compressed.** Brotli takes the HTML and CSS from 69 KB
-  to 14 KB. Most hosts do this by default; the numbers above assume it.
+  to 14 KB. The numbers above assume it.
 - **Cache the fonts hard** — `Cache-Control: public, max-age=31536000, immutable`.
-  They never change without their filename changing.
+  They never change without their filename changing. `next.config.mjs` sets
+  this header; a different host may need telling separately.
 
 ---
 

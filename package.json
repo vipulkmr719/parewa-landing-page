@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "description": "Parewa — AI proposal software for Indian digital agencies",
+  "engines": {
+    "node": ">=20.9"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

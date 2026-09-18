@@ -1,0 +1,18 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+
+  "//": [
+    "This file exists so the deploy configuration lives in the repo rather than",
+    "in Vercel's dashboard, where it can drift silently. The project was first",
+    "imported when this repo was plain HTML, so its stored preset is whatever",
+    "was detected then — not Next.js. Values set here override the dashboard.",
+    "null means 'use the framework's own default', which is also an override:",
+    "it discards a stale Build Command or Output Directory left from the static",
+    "site. Next resolves its own output, so do not name a directory here."
+  ],
+
+  "framework": "nextjs",
+  "installCommand": null,
+  "buildCommand": null,
+  "outputDirectory": null
+}
