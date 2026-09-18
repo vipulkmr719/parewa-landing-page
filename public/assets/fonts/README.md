@@ -54,7 +54,7 @@ accented Latin, intersected with what each source subset actually contains.
 
 If you regenerate, **re-derive the fallback metrics too** — the
 `size-adjust` / `ascent-override` / `descent-override` values on the
-`* Fallback` faces at the top of `../styles.css` are calibrated against these
+`* Fallback` faces at the top of `../../app/globals.css` are calibrated against these
 exact files. The method is in the root README under Performance.
 
 ## Licences
