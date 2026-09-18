@@ -10,12 +10,14 @@ export default function Benefits() {
   return (
     <section className="section">
       <div className="wrap">
-        <h2 className="section__head">One brief in. A ready-to-send proposal out.</h2>
-        <p className="lead">
-          Tell Parewa what the client needs in a few lines. It writes the scope, deliverables,
-          timeline and pricing in your agency’s voice, on your agency’s template. You review,
-          adjust, and send — usually in under 15 minutes.
-        </p>
+        <div className="section__intro">
+          <h2 className="section__head">One brief in. A ready-to-send proposal out.</h2>
+          <p className="lead">
+            Tell Parewa what the client needs in a few lines. It writes the scope, deliverables,
+            timeline and pricing in your agency’s voice, on your agency’s template. You review,
+            adjust, and send — usually in under 15 minutes.
+          </p>
+        </div>
 
         <div className="benefits">
           {BENEFITS.map(([title, body]) => (

@@ -10,14 +10,16 @@ export default function Problem() {
   return (
     <section className="section section--sunk">
       <div className="wrap">
-        <h2 className="section__head">
-          You’re not losing deals on price. You’re losing them on turnaround.
-        </h2>
+        <div className="section__intro">
+          <h2 className="section__head">
+            You’re not losing deals on price. You’re losing them on turnaround.
+          </h2>
 
-        <div className="problem__story">
-          <p>A client calls on Thursday. They want a scope and a number. So the same thing happens that always happens.</p>
-          <p>Someone opens the last proposal you sent — the one for a different client, in a different industry — and starts deleting. The formatting breaks halfway down. The pricing table from the old retainer is still in there. Three hours later it’s a PDF, and it goes out on WhatsApp on Friday evening.</p>
-          <p>Then nothing. You don’t know if they opened it. You don’t know if they read past page two. You don’t know if they forwarded it to their founder or let it sit. So on Monday you send “Just following up 😊” and wait some more.</p>
+          <div className="problem__story">
+            <p>A client calls on Thursday. They want a scope and a number. So the same thing happens that always happens.</p>
+            <p>Someone opens the last proposal you sent — the one for a different client, in a different industry — and starts deleting. The formatting breaks halfway down. The pricing table from the old retainer is still in there. Three hours later it’s a PDF, and it goes out on WhatsApp on Friday evening.</p>
+            <p>Then nothing. You don’t know if they opened it. You don’t know if they read past page two. You don’t know if they forwarded it to their founder or let it sit. So on Monday you send “Just following up 😊” and wait some more.</p>
+          </div>
         </div>
 
         <ul className="rule-list">

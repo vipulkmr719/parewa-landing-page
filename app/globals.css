@@ -211,6 +211,26 @@ strong{ font-weight:600; }
 
 .section__head{ max-width:13.7em; }
 .section__head--wide{ max-width:19.4em; }
+
+/* Heading in one column, the text it introduces in the next. The breakpoint is
+   where both columns still hold a readable measure: at 900px the story column
+   was down to 40 characters a line, at 1000px it is 47. Below that it stacks
+   and the children keep the spacing they have on their own. */
+@media (min-width:1000px){
+  .section__intro{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);
+    gap:0 clamp(2.5rem,0.5rem + 5vw,4.5rem);
+    align-items:start;
+  }
+  .section__intro > .section__head{ max-width:11.5em; }
+  .section__intro > .lead,
+  .section__intro > .problem__story{ margin-top:0; max-width:none; }
+
+  /* The questions carry far more text than the heading beside them. */
+  .section__intro--faq{ grid-template-columns:minmax(0,1fr) minmax(0,1.85fr); }
+  .section__intro--faq > .faq{ margin-top:0; max-width:none; }
+}
 .lead{
   font-size:var(--t-lead);
   color:var(--slate-soft);
@@ -751,29 +771,33 @@ strong{ font-weight:600; }
 .benefits{
   margin-top:clamp(2.5rem,1.8rem + 3vw,3.5rem);
   display:grid;
-  grid-template-columns:repeat(6,minmax(0,1fr));
+  grid-template-columns:repeat(3,minmax(0,1fr));
   gap:0;
   border-top:1px solid var(--rule);
   border-left:1px solid var(--rule);
 }
-/* Five blocks: three across, then two wider. Never a stranded last cell. */
-.benefit{ grid-column:span 2; }
-.benefit:nth-child(4),
-.benefit:nth-child(5){ grid-column:span 3; }
+/* Five blocks in three equal columns: three across, then two, and the sixth
+   cell left empty. Splitting the second row at halves instead — which is what
+   a six-column grid gives you — puts its rule at 50% while the row above
+   divides at thirds, and none of the vertical lines meet. An empty cell is
+   quieter than a misaligned one, and ::after closes the border round it so
+   the block still reads as a finished grid. */
+.benefits::after{
+  content:"";
+  border-right:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+}
 
-/* The nth-child rules above out-specify a bare .benefit, so the overrides
-   below have to match them selector for selector. */
 @media (max-width:900px){
   .benefits{ grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .benefit,
-  .benefit:nth-child(4){ grid-column:span 1; }
-  .benefit:nth-child(5){ grid-column:span 2; }
+}
+/* One column leaves nothing for the filler cell to close, so it would just be
+   an empty box at the end of the list. */
+@media (max-width:620px){
+  .benefits::after{ display:none; }
 }
 @media (max-width:620px){
   .benefits{ grid-template-columns:minmax(0,1fr); }
-  .benefit,
-  .benefit:nth-child(4),
-  .benefit:nth-child(5){ grid-column:span 1; }
 }
 .benefit{
   border-right:1px solid var(--rule);
@@ -1108,8 +1132,24 @@ strong{ font-weight:600; }
   border-color:var(--wing);
   box-shadow:0 1px 0 var(--wing);
 }
-/* Pro sits in the middle and lifts, but only while the three are side by side. */
-@media (min-width:981px){ .plan--pro{ margin-top:-1.25rem; } }
+/* Pro used to lift 20px here. Twenty pixels is too little to read as a
+   deliberate step and just enough to look like the cards missed each other,
+   and it broke the shared rows below. The wing border, the shadow and the
+   marker chip already say which one is the recommendation. */
+
+/* marker | name | price | alt | who | features | cta */
+@media (min-width:981px){
+  .plans{ grid-template-rows:auto auto auto auto auto 1fr auto; }
+  @supports (grid-template-rows:subgrid){
+    .plan{
+      display:grid;
+      grid-row:span 7;
+      grid-template-rows:subgrid;
+      row-gap:0;
+    }
+    .plan .btn{ margin-top:0; }
+  }
+}
 
 .plan__marker{
   display:inline-block;
@@ -1121,7 +1161,10 @@ strong{ font-weight:600; }
   border-radius:100px;
   padding:.25rem .625rem;
   margin-bottom:.875rem;
+  /* flex-start for the stacked flex layout, justify-self for the subgrid one,
+     otherwise the chip stretches the full width of the card. */
   align-self:flex-start;
+  justify-self:start;
 }
 .plan__name{ font-size:var(--t-lead); font-weight:600; font-family:var(--display); }
 .plan__price{
@@ -1157,8 +1200,11 @@ strong{ font-weight:600; }
   padding-bottom:1.25rem;
   border-bottom:1px solid var(--rule);
 }
+/* The intro line and the list travel together: they are one row of the shared
+   grid, so a card without an intro still starts its list where the others do. */
+.plan__body{ margin-bottom:1.75rem; }
 .plan__intro{ font-size:var(--t-small); font-weight:500; margin-bottom:.75rem; }
-.plan__features{ font-size:var(--t-small); display:grid; gap:.5rem; margin-bottom:1.75rem; }
+.plan__features{ font-size:var(--t-small); display:grid; gap:.5rem; }
 .plan__features li{ display:flex; gap:.5625rem; align-items:flex-start; line-height:1.45; }
 .plan__features .tick{ margin-top:.125rem; }
 .plan .btn{ margin-top:auto; }
@@ -1177,13 +1223,17 @@ strong{ font-weight:600; }
   background:var(--paper-raised);
   padding:clamp(1.5rem,1.1rem + 1.6vw,2.25rem);
   display:grid;
-  grid-template-columns:minmax(0,1fr) auto;
-  gap:1.5rem 2.5rem;
-  align-items:center;
+  grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);
+  gap:1.5rem clamp(2rem,0.5rem + 4vw,4rem);
+  align-items:start;
 }
-.offer h3{ max-width:13.4em; }
-.offer p{ margin-top:.75rem; color:var(--slate-soft); font-size:var(--t-small); max-width:30.6em; }
-@media (max-width:760px){ .offer{ grid-template-columns:1fr; } }
+.offer h3{ max-width:9.5em; }
+.offer p{ color:var(--slate-soft); font-size:var(--t-small); max-width:none; }
+.offer .btn{ margin-top:1.25rem; }
+@media (max-width:760px){
+  .offer{ grid-template-columns:minmax(0,1fr); }
+  .offer h3{ max-width:13.4em; }
+}
 
 /* --------------------------------------------------------------------------
    FAQ

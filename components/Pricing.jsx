@@ -66,11 +66,13 @@ export default function Pricing() {
   return (
     <section className="section section--sunk" id="pricing">
       <div className="wrap">
-        <h2 className="section__head">Pricing built for Indian agencies</h2>
-        <p className="lead">
-          Less than what one round of proposal formatting costs you in team hours. Every plan
-          includes everything you need to send, track and sign.
-        </p>
+        <div className="section__intro">
+          <h2 className="section__head">Pricing built for Indian agencies</h2>
+          <p className="lead">
+            Less than what one round of proposal formatting costs you in team hours. Every plan
+            includes everything you need to send, track and sign.
+          </p>
+        </div>
 
         <div className="toggle" role="group" aria-label="Billing period" aria-describedby="toggleScope">
           <button
@@ -111,13 +113,15 @@ export default function Pricing() {
 
               <p className="plan__alt">{plan.altText || plan.alt[billing]}</p>
               <p className="plan__who">{plan.who}</p>
-              {plan.intro && <p className="plan__intro">{plan.intro}</p>}
+              <div className="plan__body">
+                {plan.intro && <p className="plan__intro">{plan.intro}</p>}
 
-              <ul className="plan__features">
-                {plan.features.map((f) => (
-                  <li key={f}><Tick />{f}</li>
-                ))}
-              </ul>
+                <ul className="plan__features">
+                  {plan.features.map((f) => (
+                    <li key={f}><Tick />{f}</li>
+                  ))}
+                </ul>
+              </div>
 
               {plan.contact ? (
                 <a
@@ -139,15 +143,15 @@ export default function Pricing() {
         </p>
 
         <div className="offer">
-          <div>
-            <h3>Waitlist members get 40% off the first year</h3>
+          <h3>Waitlist members get 40% off the first year</h3>
+          <div className="offer__side">
             <p>
               Join before launch and your discount locks in at signup — plus free onboarding, and
               we’ll rebuild your three best-performing proposals as Parewa templates at no cost.
               Limited to the first 500 agencies.
             </p>
+            <WaitlistButton>Secure Your Spot</WaitlistButton>
           </div>
-          <WaitlistButton>Secure Your Spot</WaitlistButton>
         </div>
       </div>
     </section>
