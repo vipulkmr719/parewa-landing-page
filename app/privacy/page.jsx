@@ -81,7 +81,7 @@ export default function Privacy() {
       <h2 id="collect">2. What we collect</h2>
 
       <h3>When you join the waitlist</h3>
-      <p>Three things, all of them typed in by you:</p>
+      <p>Four things you type in, and one we record for you:</p>
       <ul className="legal__list">
       <li><strong>Your work email address</strong> — so we can tell you when access opens.</li>
       <li><strong>The date and time you joined</strong> — recorded automatically, so we know
@@ -89,10 +89,18 @@ export default function Privacy() {
       <li><strong>Your agency name</strong> — so we know who you are.</li>
       <li><strong>Roughly how many proposals you send a month</strong> — a range, chosen from
       a dropdown, so we know who to open access to first.</li>
+      <li><strong>Whatever you write in the suggestion box</strong> — optional, and entirely
+      yours to leave blank. We store it exactly as you typed it and read it to decide what
+      to build, so please don't put anything in there you would not want us to keep. If you
+      name a client or a colleague in it, that is their information too, and the same
+      promises in this policy cover it.</li>
       </ul>
       <p>
-      That is the whole form. There is no hidden field. You can read the page source and
-      confirm it.
+      That is the whole form, with one exception worth naming. There is a single field you
+      cannot see: a decoy named “website”, which is always empty for a person and
+      which automated bots fill in. Anything that arrives with it filled is thrown away
+      instead of saved. Nothing <em>you</em> type is hidden from you, and you can read the
+      page source and confirm all of this.
       </p>
 
       <h3>When you simply visit</h3>

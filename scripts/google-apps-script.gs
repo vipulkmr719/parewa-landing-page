@@ -30,7 +30,9 @@
 
 var SHARED_SECRET = 'CHANGE-ME-to-a-long-random-string';
 var SHEET_NAME = 'Sheet1';   // the tab to append to
-var HEADERS = ['Joined at', 'Email', 'Agency', 'Proposals per month'];
+// If your sheet already has rows, the header row is not rewritten — add
+// "Suggestion" to column E by hand once; new values land there regardless.
+var HEADERS = ['Joined at', 'Email', 'Agency', 'Proposals per month', 'Suggestion'];
 
 function doPost(e) {
   try {
@@ -56,7 +58,8 @@ function doPost(e) {
       data.joinedAt || new Date().toISOString(),
       email,
       agency,
-      String(data.volume || '').trim()
+      String(data.volume || '').trim(),
+      String(data.suggestion || '').trim()
     ]);
 
     return reply(true);

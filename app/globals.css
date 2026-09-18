@@ -1307,7 +1307,7 @@ strong{ font-weight:600; }
 .form{ display:grid; gap:.75rem; }
 .field{ display:grid; gap:.375rem; }
 .field label{ font-size:var(--t-small); font-weight:500; }
-.field input,.field select{
+.field input,.field select,.field textarea{
   font:inherit;
   font-size:var(--t-body);
   color:var(--slate);
@@ -1318,7 +1318,21 @@ strong{ font-weight:600; }
   width:100%;
   min-width:0;
 }
-.field input:focus-visible,.field select:focus-visible{ outline-offset:1px; }
+.field input:focus-visible,.field select:focus-visible,.field textarea:focus-visible{ outline-offset:1px; }
+.field textarea{
+  line-height:1.5;
+  /* Vertical only: dragging it wider would break out of the dialog. */
+  resize:vertical;
+  min-height:5.25rem;
+}
+.field textarea::placeholder{ color:var(--slate-soft); }
+/* Says the field can be skipped without shouting it, and stays legible on the
+   dark final section where the label colour is overridden. */
+.field__optional{
+  font-weight:400;
+  color:var(--slate-soft);
+}
+.final .field__optional{ color:rgba(247,248,247,.62); }
 .final .field label{ color:var(--paper); }
 .form__note{ font-size:.75rem; color:var(--slate-soft); }
 .final .form__note{ color:rgba(247,248,247,.62); }
