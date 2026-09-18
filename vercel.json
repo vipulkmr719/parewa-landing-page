@@ -2,17 +2,17 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
 
   "//": [
-    "This file exists so the deploy configuration lives in the repo rather than",
-    "in Vercel's dashboard, where it can drift silently. The project was first",
-    "imported when this repo was plain HTML, so its stored preset is whatever",
-    "was detected then — not Next.js. Values set here override the dashboard.",
-    "null means 'use the framework's own default', which is also an override:",
-    "it discards a stale Build Command or Output Directory left from the static",
-    "site. Next resolves its own output, so do not name a directory here."
+    "framework overrides the Framework Preset stored in the dashboard, which is",
+    "the whole point of this file: the project was imported when the repo was",
+    "plain HTML and its stored preset does not describe a Next app.",
+    "",
+    "Nothing else belongs here. Build Command and Output Directory are left out",
+    "deliberately, not forgotten — with a framework set, Vercel's Next",
+    "integration resolves both, and naming an output directory makes it treat",
+    "the build as static output and drop the serverless route behind",
+    "/api/waitlist. null is not the same as omitting: for framework, null means",
+    "the preset 'Other'."
   ],
 
-  "framework": "nextjs",
-  "installCommand": null,
-  "buildCommand": null,
-  "outputDirectory": null
+  "framework": "nextjs"
 }

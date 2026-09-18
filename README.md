@@ -21,9 +21,19 @@ posted to, so the environment variables and the Apps Script do not change.
 `vercel.json` pins the framework to `nextjs` rather than leaving it to
 detection. This project was first imported when the repo was plain HTML, so
 Vercel stored a preset for a static site and does not revisit that choice on
-its own. Pinning it in the repo also discards any Build Command or Output
-Directory left over in the dashboard, which is the kind of state that drifts
-out of sight and makes a deploy succeed while serving the wrong thing.
+its own — which is how a build can succeed and still serve a 404.
+
+It sets the framework and nothing else. Build Command and Output Directory
+are omitted on purpose: Vercel's Next integration resolves both, and naming
+an output directory makes it treat the build as static output, which would
+drop the serverless route behind `/api/waitlist`. Note that omitting a field
+is not the same as setting it to `null` — for `framework`, `null` selects the
+preset "Other".
+
+`vercel.json` cannot clear an Output Directory that is set explicitly in the
+dashboard. If a deploy fails with *No Output Directory named "build" found*,
+that override is still there: Settings → Build & Deployment → Output
+Directory, switch it off.
 
 ---
 
