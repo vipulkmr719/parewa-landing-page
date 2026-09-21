@@ -1,80 +1,123 @@
 ---
 name: visual-hierarchy
-description: Decide what the eye should hit first on a Parewa page and make the design say so — what is emphasised, what recedes, whether the primary CTA is obvious, whether the focal point still holds. Use this when the user says a section feels flat, everything competes, the CTA gets lost, the message is not landing, or something is "not drawing the eye"; and when adding an element that will compete with an existing one for attention. This is about which element wins, not about whether things line up.
+description: Make a Parewa section easy to scan — decide what reads first, what supports it and what the next step is, and carry that with type, weight, whitespace and alignment rather than with size alone. Use this when a section feels flat or everything competes, when the primary CTA is getting lost, when paragraphs run too wide or too dense, when things look misaligned or unfinished, and when the page starts repeating the same heading-plus-three-cards shape. The final test is whether you can say what the visitor looks at first.
 ---
 
-# Visual hierarchy on Parewa
+# Visual Hierarchy
 
-Hierarchy is the order a page hands itself to the reader. This skill is for
-deciding that order and making the design carry it.
+Make information easy to scan and understand.
 
-Two neighbours worth keeping distinct: if the problem is that things do not
-line up or a block looks unfinished, that is composition — see
-`landing-page-design`. If the problem is that the wrong thing is loudest, or
-nothing is, you are in the right place.
+## Hierarchy
 
-## The order this page commits to
+Every section should have:
 
-1. The headline — what Parewa does, in one sentence.
-2. The demo — brief in, proposal out, status back. **This is the focal
-   point of the page.** It is the product doing its one trick, and it earns
-   more visual weight than anything else on screen.
-3. The primary CTA — join the waitlist.
-4. Everything else.
+1. Primary information
+2. Supporting information
+3. Action or next step
 
-Changes that quietly demote the demo are the most common way this page gets
-worse. A new section with a big visual, a heading scaled up to fill space, a
-card grid given borders heavy enough to pull the eye — each is defensible
-alone and all of them cost the focal point.
+Do not give every element equal visual weight.
 
-## How emphasis is made here
+## Typography
 
-The palette is restrained, so hierarchy comes from a small set of moves. Reach
-for them in roughly this order:
+Use typography to create hierarchy.
 
-- **Size and weight**, within the existing scale. `--t-display` is the
-  headline; `--t-h2` is a section; `--t-lead` is a deck. The scale already
-  encodes the hierarchy — use the right step rather than inventing one.
-- **Colour, semantically.** `--slate` for what matters, `--slate-soft` for
-  what supports it. Reducing a secondary element to `--slate-soft` is usually
-  better than enlarging the primary one.
-- **Space.** Isolation reads as importance. A heading with room around it
-  outranks a bigger heading in a crowded block.
-- **Ground.** `--paper-raised` against `--paper-sunk` lifts a card without a
-  shadow. This is how elevation is done here.
-- **`--grain`, once.** The highlight on the hero lead. It stops being a
-  highlight the second time it appears.
+Control:
 
-What not to reach for: bigger type as a first resort, extra shadows, a new
-accent colour, badges, or an icon added to make something feel significant.
-The page is quiet on purpose, and in a quiet page a small move is loud.
+- size
+- weight
+- line height
+- letter spacing
+- measure
+- whitespace
 
-## Emphasis has to be unambiguous
+Do not solve hierarchy problems only by increasing font size.
 
-A signal too weak to read as deliberate reads as a mistake instead.
+## Headings
 
-The recommended pricing card used to sit 20px above its neighbours. Twenty
-pixels is too little to register as a step and just enough to look like the
-cards missed each other — and it broke their shared rows. It came out; the
-border, the ground and the marker chip carry the emphasis now, and they are
-unambiguous.
+Headings should be:
 
-If an offset, a weight change or a tint is not obviously on purpose, either
-commit to it properly or remove it. Half-emphasis is worse than none.
+- specific
+- readable
+- appropriately sized
+- visually connected to their content
 
-## Checking it rather than asserting it
+Avoid unnecessarily huge headings.
 
-Hierarchy is judged by eye, but it is judged on the rendered page, not in the
-CSS. Screenshot the section (`visual-qa` has the script) and ask:
+## Body Copy
 
-- Squinting, or at thumbnail size, what do you see first? Is that what you
-  intended?
-- Is there exactly one primary action in view, or are two buttons competing at
-  the same weight?
-- Does any secondary element out-weigh something above it in the order?
-- Did the demo stay the focal point?
+Maintain readable line lengths.
 
-Heading levels carry hierarchy for screen readers too. Emphasis is a visual
-decision; `h2` versus `h3` is a structural one, and they should agree. Never
-pick a heading level for its font size — set the level by structure and style
-it with the scale.
+Do not create extremely wide paragraphs.
+
+Avoid dense walls of text.
+
+## Whitespace
+
+Use whitespace intentionally.
+
+Whitespace should separate:
+
+- ideas
+- sections
+- hierarchy levels
+
+Do not fill empty space with decorative elements.
+
+## Alignment
+
+Maintain consistent alignment.
+
+Check:
+
+- headings
+- paragraphs
+- buttons
+- cards
+- screenshots
+- section boundaries
+
+Misalignment creates an unfinished appearance.
+
+## CTA Hierarchy
+
+The primary CTA must be visually distinguishable.
+
+Do not have multiple competing primary buttons.
+
+## Cards
+
+Cards should communicate meaningful grouping.
+
+Do not put every piece of content inside a card.
+
+## Visual Rhythm
+
+Create variation between sections.
+
+Avoid:
+
+section → heading → 3 cards
+section → heading → 3 cards
+section → heading → 3 cards
+
+This repetitive structure makes a page feel AI-generated.
+
+Use:
+
+- editorial layouts
+- product screenshots
+- split layouts
+- lists
+- timelines
+- comparisons
+- full-width content
+
+where appropriate.
+
+## Final Check
+
+Ask:
+
+"What does the visitor look at first?"
+
+If the answer is unclear, improve the hierarchy.
