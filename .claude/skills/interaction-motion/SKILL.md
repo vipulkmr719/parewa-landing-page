@@ -1,92 +1,109 @@
 ---
 name: interaction-motion
-description: Add or change movement and interactive states on the Parewa page — transitions, hover, focus, active and disabled states, the hero's brief-to-proposal demo, the waitlist dialog's open and close behaviour, scroll-triggered reveals. Use this whenever you touch an animation, transition, keyframe, hover or focus style, or a component's interactive state, and when the user asks to make something animate, feel smoother, move, or react. It also covers what must still work with reduced motion and with no JavaScript.
+description: Use motion on the Parewa page to aid understanding rather than to decorate — the restrained house philosophy, the full set of interaction states from default through hover, focus, active, disabled and loading, and what the product demo's animation is allowed to be. Use this whenever you touch an animation, transition, keyframe, hover or focus style, or a component's interactive state, when the user asks to make something animate, move or feel smoother, and before adding any scroll-triggered effect. It also covers reduced motion, jank and layout shift.
 ---
 
-# Motion and interaction on Parewa
+# Interaction and Motion
 
-The page moves in two places on purpose and is otherwise still. That restraint
-is the design, not an omission — a proposal tool for agency owners earns trust
-by being calm.
+Use motion to improve understanding and perceived quality,
+not to decorate the page.
 
-## What already moves, and why
+## Existing Motion Philosophy
 
-**The hero demo.** A brief types itself, a proposal assembles, a status rail
-lights up. This is the product doing its one trick and it is the only
-substantial animation on the page. It earns its length because it *is* the
-argument.
+Parewa intentionally uses restrained animation.
 
-**Interaction feedback.** Short transitions on hover, focus and press. Enough
-to feel responsive, not enough to notice.
+The hero/product demonstration is the primary animated experience.
 
-Everything else holds still. Before adding motion, ask what it tells the
-reader that stillness does not. "It feels more alive" is not an answer —
-scroll-triggered reveals on every section make a page feel cheap and make the
-content arrive late.
+Other sections should remain relatively quiet.
 
-## The rule the hero is built around
+## Interaction States
 
-Reduced-motion users get the **completed** state, not a broken one.
+Interactive elements should have appropriate:
 
-This is why `Hero` renders the finished brief on the server and then rewinds
-it on mount, rather than starting empty and filling in. With no JavaScript,
-and with `prefers-reduced-motion`, the page is already complete — the
-animation is something added for people who can take it, not something the
-content depends on.
+- default
+- hover
+- focus
+- active
+- disabled
+- loading
 
-Any new animation has to hold the same shape. Ask: if this never runs, is the
-content still there and still legible? If the answer is no, the animation is
-carrying content and needs restructuring, not a media query.
+states.
 
-```css
-@media (prefers-reduced-motion: reduce){
-  /* land on the end state; do not simply shorten the duration */
-}
-```
+## Buttons
 
-Shortening a transition to 0.01s is fine for a hover tint. It is not fine for
-anything that reveals content, because the content was never the animation's
-to withhold.
+Button interactions should be subtle.
 
-## Interactive states
+Prefer:
 
-Every control needs hover, focus-visible, active and, where it applies,
-disabled. Focus is the one most often forgotten and the one that matters most:
-the page sets a visible 2px ring with offset, and removing it for visual
-tidiness breaks keyboard use entirely.
+- color transition
+- border transition
+- slight opacity changes
 
-Hover alone is not a state — touch devices have no hover, so anything
-discoverable only by hovering is undiscoverable on a phone.
+Avoid excessive:
 
-Disabled must look disabled and still be legible. The waitlist button swaps
-its label while submitting rather than only dimming, so the change is visible
-rather than merely decorative.
+- scaling
+- bouncing
+- glowing
+- movement
 
-## The dialog
+## Navigation
 
-The waitlist dialog is a native `<dialog>`, which brings focus trapping and
-Escape for free. Two things that are easy to break:
+Navigation interactions should clearly communicate:
 
-- **React state and the element must stay in step.** Escape fires the native
-  `close` event without going through your handler, so the component listens
-  for `close` and syncs. Bypass that and the dialog can end up visually shut
-  but still open in state.
-- **Focus returns to whatever opened it.** `WaitlistProvider` keeps that
-  reference. Losing it drops a keyboard user at the top of the document.
+- hover
+- active
+- focus
 
-## Cost
+## FAQ
 
-Motion is not free on the 4G this audience reads on. Prefer `transform` and
-`opacity` — they composite rather than triggering layout. Animating width,
-height, top or margin forces reflow on every frame.
+FAQ expansion should feel responsive and predictable.
 
-Anything that changes layout after load is layout shift, which the page keeps
-near zero. If you add a reveal, re-measure CLS afterwards rather than assuming.
+Avoid excessive animation.
 
-## Done means
+## Product Demo
 
-- It works with `prefers-reduced-motion`, landing on the end state
-- It works with JavaScript off, or the content does not depend on it
-- Focus is visible and the tab order is unchanged
-- Transitions use `transform` / `opacity` where they can
-- Layout shift did not regress — see `visual-qa`
+The product demonstration may use animation to communicate
+the product workflow.
+
+Animation should make the product easier to understand.
+
+It should not exist only for visual spectacle.
+
+## Scroll Animation
+
+Do NOT automatically add scroll-triggered animations to every section.
+
+Avoid:
+
+- fade-in on every element
+- slide-up on every card
+- staggered animation everywhere
+- parallax everywhere
+
+## Performance
+
+Animations should not cause:
+
+- layout shift
+- excessive CPU usage
+- jank
+- mobile performance problems
+
+Prefer transform and opacity when animation is necessary.
+
+## Reduced Motion
+
+Respect:
+
+prefers-reduced-motion: reduce
+
+When reduced motion is enabled:
+
+- remove decorative animation
+- preserve meaningful state changes
+- show completed states immediately
+
+## Principle
+
+If removing the animation makes the interface clearer,
+the animation probably wasn't necessary.

@@ -1,119 +1,144 @@
 ---
 name: landing-page-design
-description: Compose and lay out sections of the Parewa landing page — adding a new section, restructuring an existing one, fixing grids whose rules do not meet, card rows that sit ragged, dead columns and whitespace that reads as absence. Use this when the user asks to add a section, rework one, tidy or tighten the layout, or says a block looks unbalanced, empty, cramped or unfinished. Prefer it over restyling: on this page the fix is almost always structure, not decoration.
+description: Design and improve the Parewa landing page as a complete product experience — what each section is for, whether the hero still communicates product, user, value and action, whether there is one unambiguous primary CTA, and whether the page keeps its strong-quiet rhythm. Use this when adding or reworking a section, when deciding whether a section earns its place, when the value proposition or the call to action is not landing, and before adding anything just because other SaaS pages have one.
 ---
 
-# Composing a section of Parewa
+# Landing Page Design
 
-This is the skill for how a section is built: what goes in it, how it sits in
-the page, and why a block that is correct cell by cell can still look wrong.
+Design and improve the Parewa landing page as a complete product
+experience.
 
-Its neighbours: `parewa-design-system` holds the values you build with,
-`visual-hierarchy` decides what wins attention, `responsive-design` checks it
-at every width. This one is about the structure in between.
+## Primary Goal
 
-## The page's existing patterns
+The visitor should understand:
 
-Before inventing a layout, check whether one of these fits. Reusing a pattern
-is most of what makes a page feel designed rather than assembled.
+1. What Parewa does
+2. Who it is for
+3. Why it matters
+4. What they should do next
 
-- **Section intro, two columns.** Heading in one column, the text it
-  introduces in the next, above 1000px (`.section__intro`). This is the
-  default for a section that opens with a heading and a paragraph.
-- **Alternating feature rows.** Copy one side, a product mock the other,
-  sides swapping down the page (`.feature`, with `FeatureShots` supplying the
-  panels). Flush tops read as deliberate; centred read as ragged.
-- **Bordered card grid.** Equal columns with hairline rules (`.benefits`).
-- **Rule list.** A two-column list divided by hairlines (`.rule-list`).
-- **Full-bleed band.** A strip in `--paper-sunk` or the dark ground, used to
-  break the rhythm between sections.
+within a very short amount of time.
 
-Sections alternate `--paper` and `--paper-sunk` to give the page a pulse. Keep
-that alternation when inserting one.
+## Page Structure
 
-## The four structural faults this page has actually had
+Use the existing architecture.
 
-### Rules that do not meet
+Current major sections include:
 
-If a grid's rows divide at different fractions, none of the vertical lines
-align and the block looks sloppy even though every cell is correct.
+- SiteHeader
+- Hero
+- TrustStrip
+- Problem
+- Benefits
+- Features
+- HowItWorks
+- Pricing
+- Faq
+- FinalCta
+- SiteFooter
+- StickyCta
 
-The benefits grid was five cards in a six-column grid: three across the top
-dividing at thirds, two across the bottom dividing at halves. Nothing met.
-Three equal columns fixed it — five cards fill five cells and the sixth is
-left empty with its border closed by `::after`, so the block still reads as
-finished. An empty cell is far quieter than a misaligned one. Drop the filler
-in the single-column layout, where there is nothing to close.
+Do not add sections simply because common SaaS landing pages have them.
 
-### Card rows that do not share a baseline
+Every section must have a purpose.
 
-Independently sized cards put their internal elements at different heights.
-One plan with a one-line description beside another with three puts the rule
-under them in two places, and the row reads as ragged.
+## Hero
 
-Subgrid is the fix — give the container explicit rows and let each card span
-them:
+The hero is the most important section.
 
-```css
-.plans{ grid-template-rows:auto auto auto auto auto 1fr auto; }
-.plan{ display:grid; grid-row:span 7; grid-template-rows:subgrid; row-gap:0; }
-```
+It should communicate:
 
-Two things to watch: group optional elements into a single row so a card
-missing one does not shift everything after it, and remember flexbox
-properties stop applying — `align-self:flex-start` on a chip becomes
-`justify-self:start`, or the chip stretches the full card width.
+- product
+- target user
+- core value
+- primary CTA
 
-### Dead columns
+The product demonstration should remain the primary visual focus.
 
-The wrap is 1100px but body text is capped near 34em, so a heading with a
-paragraph beneath fills about two thirds of the width and leaves the rest
-empty. That reads as a layout that failed to load rather than as margin.
+Avoid replacing the product demonstration with generic illustrations.
 
-Put something in the column — the editorial split above — or make the margin
-obviously deliberate. Do not widen the text to fill it: line length is checked
-by the page's tests, and a 95-character measure is a worse problem than an
-empty column.
+## CTA
 
-### Space that is not rhythm
+Maintain one clear primary action.
 
-Section spacing comes from `--sect-y` and component gaps should agree with
-their neighbours. Space applied ad hoc to fix one block is how a page loses
-its pulse — the eye reads inconsistent gaps as carelessness long before anyone
-can say why.
+Secondary actions should not compete with the primary CTA.
 
-## Adding a new section
+Buttons should communicate what happens after clicking.
 
-1. Check the section belongs. This page has a shape — problem, then
-   resolution, then proof, then price, then objections. A section that does
-   not fit that arc usually belongs on another page.
-2. Reuse a pattern from the list above.
-3. Add it to `app/page.jsx` in the right place in the arc, and keep the
-   `--paper` / `--paper-sunk` alternation.
-4. Write the copy with `landing-copy`, not as filler to be replaced later.
-5. Check it at all eight widths, then verify with `visual-qa`.
+Avoid vague CTAs such as:
 
-## What not to do
+"Learn More"
 
-- **No absolute positioning to make a screenshot look right.** The layout has
-  to survive the copy changing, and the copy will change.
-- **No new spacing or radius values.** The tokens exist.
-- **No fixing a local problem in a base selector.** That is how a page
-  acquires side effects two breakpoints away.
-- **No decoration to rescue a layout.** If a section needs a gradient or a
-  shadow to hold together, the structure is wrong.
+"Explore"
 
-## Prove it worked
+"Discover"
 
-Re-measure the selectors you diagnosed with (`visual-qa` has the script).
-Alignment fixes produce identical numbers across siblings, and that is the
-evidence:
+when a more specific action is possible.
 
-```
-plan names   7461, 7461, 7461
-rules        7710, 7710, 7710
-```
+## Social Proof
 
-Then check layout shift did not regress — restructuring is exactly the change
-that introduces it — and run the responsive pass, because a fix at 1280 is not
-a fix at 390.
+Only use real information.
+
+Never invent:
+
+- customers
+- agency names
+- user counts
+- testimonials
+- logos
+- ratings
+
+If information is unavailable, use a clear placeholder.
+
+## Features
+
+Prefer demonstrating the actual product.
+
+Avoid generic icon grids where screenshots/product UI can communicate
+the feature more effectively.
+
+## Problem Section
+
+Problem statements should be concrete.
+
+Avoid generic copy such as:
+
+"Businesses struggle with productivity."
+
+Prefer product-specific pain points.
+
+## Pricing
+
+Pricing should be immediately understandable.
+
+Ensure:
+
+- plan hierarchy
+- price hierarchy
+- feature hierarchy
+- CTA hierarchy
+- responsive behavior
+
+are clear.
+
+Do not invent pricing or feature claims.
+
+## FAQ
+
+Questions should address actual purchase objections.
+
+Avoid filler questions.
+
+## Final CTA
+
+The final CTA should reinforce the primary value proposition.
+
+Do not introduce a completely new message at the end.
+
+## General Rule
+
+Do not make every section visually loud.
+
+A polished landing page has rhythm:
+
+strong → quiet → strong → quiet → strong.

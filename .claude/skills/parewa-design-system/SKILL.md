@@ -37,55 +37,25 @@ Do not introduce random font families.
 
 Maintain the existing typography hierarchy.
 
-Both are self-hosted and subset in `public/assets/fonts/`, with metric-matched
-fallback faces so nothing re-wraps when the webfont arrives. Do not load fonts
-from a CDN — it costs two extra handshakes before first paint, which is the
-wrong trade for the patchy 4G a lot of this audience reads on.
-
-The display face is variable in width, and the scale uses four fallback faces
-to match it: `--display-88` / `-92` / `-96` / `--display`. Headings pick the
-width that suits their size, which is why `h1` and `h2` use different ones.
-
-The scale, all fluid between mobile and desktop:
-
-```
---t-display  36 → 56     --t-lead   18 → 20
---t-h2       28 → 40     --t-body   16
---t-h3       22 → 28     --t-small  14
-```
-
-**Measures are set in `em`, never `ch`.** `ch` resolves against the width of
-the digit zero, which a metric-matched fallback does not match, so every
-`ch`-based width re-wrapped the moment the real font loaded. That was the
-source of this page's layout shift. `em` depends only on font-size, so it
-holds. For the same reason, `max-width` belongs on the text element itself,
-not a wrapper — on a wrapper it resolves against the wrong font.
-
 ## Existing Color System
 
 Use the existing CSS variables:
 
-```
---paper          page ground, a cool white
---paper-sunk     the pause: problem section, insets
---paper-raised   cards lifted off the paper
---slate          headlines and body
---slate-soft     secondary text
---wing           primary buttons, links, active states
+--paper
+--paper-sunk
+--paper-raised
+--slate
+--slate-soft
+--wing
 --wing-deep
---green          tracking states only — never decoration
---green-deep     green that is safe to set text in
+--green
+--green-deep
 --green-tint
---grain          highlighter. Once per page.
---rule           hairlines, borders, dividers
+--grain
+--rule
 --rule-strong
-```
 
 Never create arbitrary colors when an existing token is appropriate.
-
-The semantics matter as much as the values. Green means a tracking state, not
-"good" in general. `--grain` is the one highlight on the page and stops being
-a highlight the moment it is used twice.
 
 ## Brand Treatment
 
@@ -110,11 +80,9 @@ Reuse the existing spacing system.
 
 Prefer existing:
 
-```
---wrap    1100px         the content column
---gutter  20 → 40px      inside the wrap
---sect-y  64 → 120px     between sections
-```
+--gutter
+--sect-y
+--wrap
 
 Use consistent spacing.
 
@@ -129,7 +97,7 @@ unless there is a clear layout reason.
 
 ## Border Radius
 
-Use the existing radius system: `--radius` at 10px, `--radius-sm` at 6px.
+Use the existing radius system.
 
 Do not turn every element into a pill.
 
@@ -140,10 +108,6 @@ Cards and containers should have meaningful grouping.
 Use shadows sparingly.
 
 Do not add shadows simply to make components look "premium".
-
-The page has essentially one: a 1px line under the recommended pricing card.
-Elevation here comes from `--paper-raised` against `--paper-sunk`, not from
-blur.
 
 ## Component Reuse
 
