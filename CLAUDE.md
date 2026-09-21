@@ -369,6 +369,82 @@ Never claim a change is complete without checking the affected area.
 
 ---
 
+## Known traps
+
+Things this page has already been caught by. Each cost real debugging time
+once, and none of them is obvious from reading the code. Two more live in
+their own sections above: measures in `em` rather than `ch` under
+**Typography**, and the schema rule for `vercel.json` under **Deployment**.
+
+### The waitlist dialog desyncs if you stop listening for `close`
+
+It is a native `<dialog>`, so Escape closes the element without passing
+through any React handler. `WaitlistDialog` listens for the element's own
+`close` event and syncs state to match. Remove that listener and Escape
+leaves the dialog visually shut but still open in state, so it never reopens.
+
+Focus restoration is a separate mechanism: `WaitlistProvider` holds a
+reference to whatever opened the dialog and returns focus there on close.
+Lose it and a keyboard user is dropped at the top of the document.
+
+### Grid rows that divide at different fractions never meet
+
+The benefits block was five cards in a six-column grid: three across the top,
+dividing at thirds, and two across the bottom, dividing at halves. Every cell
+was correct and none of the vertical rules lined up, which reads as sloppy
+without it being obvious why.
+
+Three equal columns fixed it. Five cards fill five cells and the sixth is left
+empty with its border closed by `::after`, because an empty cell is much
+quieter than a misaligned one. That filler is dropped in the single-column
+layout, where there is nothing left to close.
+
+### Cards in a row need subgrid to share a baseline
+
+Independently sized cards put their internal elements at different heights. A
+plan with a one-line description beside one with three puts the rule under
+them in two places, and the row reads as ragged.
+
+Subgrid is the fix — the container declares the rows and each card spans them:
+
+```css
+@media (min-width:981px){           /* only where the cards sit side by side */
+  .plans{ grid-template-rows:auto auto auto auto auto 1fr auto; }
+  @supports (grid-template-rows:subgrid){
+    .plan{ display:grid; grid-row:span 7; grid-template-rows:subgrid; row-gap:0; }
+  }
+}
+```
+
+Both guards matter. Stacked, there are no siblings to line up with, and the
+`@supports` fence keeps the flex fallback intact where subgrid is missing.
+
+Group optional elements into a single row, so a card missing one does not
+shift everything after it. And remember flexbox properties stop applying:
+`align-self:flex-start` on a chip becomes `justify-self:start`, or the chip
+stretches the full width of the card.
+
+### Specificity beats intent, especially inside media queries
+
+When a rule works at one width and not another, it is usually one of these
+rather than anything subtle:
+
+- `.benefit:nth-child(4)` is (0,2,0) and out-specifies a bare `.benefit` at
+  (0,1,0). A media query trying to undo an `nth-child` rule with a plain class
+  selector silently loses.
+- A media-query override written *above* the base rule it means to beat, at
+  equal specificity, loses. Put the override after.
+- `.site-nav a` is (0,1,1) and beats `.btn--primary` at (0,1,0). That is how a
+  primary button once rendered grey-on-blue at 1.9:1. `:not(.btn)` fixed it.
+
+### Hover is not a state on its own
+
+Touch devices have no hover, so anything discoverable only by hovering is
+undiscoverable on a phone. Pair it with a state that survives — focus, active,
+or a permanent affordance.
+
+---
+
 ## Running it
 
 ```
@@ -381,6 +457,19 @@ npm start        # serve the production build
 Measure rather than assert. Screenshot the rendered page at the widths above
 and read the actual geometry — alignment claims, overflow, contrast and layout
 shift are all things to check in a browser, not infer from the CSS.
+
+Three scripts already exist for that, against a running server:
+
+```
+.claude/skills/visual-qa/scripts/shoot.mjs            screenshots in contiguous slices
+.claude/skills/visual-qa/scripts/measure.mjs          prints real geometry for a selector
+.claude/skills/responsive-design/scripts/overflow.mjs walks the eight widths, names
+                                                      the element sticking out, exits
+                                                      non-zero on overflow
+```
+
+`overflow.mjs` is the one no skill points at, so it is easy to miss and end up
+checking eight widths by hand.
 
 ---
 
